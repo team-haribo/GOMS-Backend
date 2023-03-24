@@ -18,3 +18,8 @@ spring:
         format_sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+gauth:
+  clientId: ${GAUTH_CLIENTID}
+  clientSecret: ${CLIENT_SECRET}
+  redirectUri: ${REDIRECT_URI}

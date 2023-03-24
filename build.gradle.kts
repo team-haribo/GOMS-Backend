@@ -14,6 +14,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -47,6 +48,9 @@ dependencies {
 	// security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.security:spring-security-test")
+
+	// auth
+	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0")
 
 }
 
