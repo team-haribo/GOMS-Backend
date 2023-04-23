@@ -1,9 +1,9 @@
 package com.project.goms.global.security.jwt
 
-import com.project.goms.domain.account.domain.RefreshToken
-import com.project.goms.domain.account.domain.repository.RefreshTokenRepository
-import com.project.goms.domain.account.presentation.data.dto.TokenDto
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.auth.RefreshToken
+import com.project.goms.domain.auth.persistence.RefreshTokenRepository
+import com.project.goms.domain.auth.presentation.data.dto.TokenDto
+import com.project.goms.domain.auth.presentation.data.enums.Authority
 import com.project.goms.global.security.jwt.common.properties.JwtExpTimeProperties
 import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import io.jsonwebtoken.Jwts

@@ -1,4 +1,4 @@
-package com.project.goms.domain.account.domain
+package com.project.goms.domain.auth
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash

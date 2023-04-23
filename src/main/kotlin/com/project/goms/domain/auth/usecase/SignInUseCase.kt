@@ -1,29 +1,26 @@
-package com.project.goms.domain.account.service.impl
+package com.project.goms.domain.auth.usecase
 
-import com.project.goms.domain.account.domain.Account
-import com.project.goms.domain.account.domain.repository.AccountRepository
-import com.project.goms.domain.account.presentation.data.dto.SignInDto
-import com.project.goms.domain.account.presentation.data.dto.TokenDto
-import com.project.goms.domain.account.presentation.data.enums.Authority
-import com.project.goms.domain.account.service.SignInService
+import com.project.goms.domain.account.Account
+import com.project.goms.domain.account.persistence.AccountRepository
+import com.project.goms.domain.auth.presentation.data.dto.SignInDto
+import com.project.goms.domain.auth.presentation.data.dto.TokenDto
+import com.project.goms.domain.auth.presentation.data.enums.Authority
+import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.gauth.property.GAuthProperties
 import com.project.goms.global.security.jwt.JwtGenerator
 import gauth.GAuth
 import gauth.GAuthUserInfo
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
-@Service
-class SignInServiceImpl(
+@UseCaseWithTransaction
+class SignInUseCase(
     private val gAuth: GAuth,
     private val accountRepository: AccountRepository,
     private val jwtGenerator: JwtGenerator,
     private val gAuthProperties: GAuthProperties
-): SignInService {
+) {
 
-    @Transactional(rollbackFor = [Exception::class])
-    override fun execute(dto: SignInDto): TokenDto {
+    fun execute(dto: SignInDto): TokenDto {
         val gAuthToken = gAuth.generateToken(
             dto.code,
             gAuthProperties.clientId,

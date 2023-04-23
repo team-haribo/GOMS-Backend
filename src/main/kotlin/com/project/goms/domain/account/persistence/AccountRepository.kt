@@ -1,6 +1,6 @@
-package com.project.goms.domain.account.domain.repository
+package com.project.goms.domain.account.persistence
 
-import com.project.goms.domain.account.domain.Account
+import com.project.goms.domain.account.Account
 import org.springframework.data.repository.CrudRepository
 import java.util.UUID
 

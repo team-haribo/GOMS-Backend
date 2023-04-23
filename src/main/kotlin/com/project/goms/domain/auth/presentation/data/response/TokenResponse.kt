@@ -1,8 +1,8 @@
-package com.project.goms.domain.account.presentation.data.dto
+package com.project.goms.domain.auth.presentation.data.response
 
 import java.time.LocalDateTime
 
-data class TokenDto(
+data class TokenResponse(
     val accessToken: String,
     val refreshToken: String,
     val accessTokenExp: LocalDateTime,

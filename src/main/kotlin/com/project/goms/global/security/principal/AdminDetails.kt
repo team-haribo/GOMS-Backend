@@ -1,6 +1,6 @@
 package com.project.goms.global.security.principal
 
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.auth.presentation.data.enums.Authority
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

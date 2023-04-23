@@ -1,6 +1,6 @@
-package com.project.goms.domain.account.domain
+package com.project.goms.domain.account
 
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.auth.presentation.data.enums.Authority
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.*
