@@ -1,17 +1,16 @@
-package com.project.goms.domain.account
+package com.project.goms.domain.account.persistence.entity
 
 import com.project.goms.domain.auth.presentation.data.enums.Authority
-import org.hibernate.annotations.GenericGenerator
+import com.project.goms.global.entity.BaseIdxEntity
 import java.util.*
 import javax.persistence.*
 
 @Entity
+@Table(name = "tbl_account")
 class Account(
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name="uuid2", strategy = "uuid2")
-    @Column(name = "account_idx", columnDefinition = "BINARY(16)", nullable = false)
-    val idx: UUID,
+    @Column(name = "account_idx")
+    override val idx: UUID,
 
     @Column(nullable = false, length = 40)
     val email: String,
@@ -34,4 +33,4 @@ class Account(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var authority: Authority
-)
+): BaseIdxEntity(idx)

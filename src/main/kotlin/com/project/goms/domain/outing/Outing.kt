@@ -1,6 +1,6 @@
 package com.project.goms.domain.outing
 
-import com.project.goms.domain.account.Account
+import com.project.goms.domain.account.persistence.entity.Account
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.*

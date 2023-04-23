@@ -1,7 +1,7 @@
 package com.project.goms.domain.auth.usecase
 
-import com.project.goms.domain.account.Account
-import com.project.goms.domain.account.persistence.AccountRepository
+import com.project.goms.domain.account.persistence.entity.Account
+import com.project.goms.domain.account.persistence.repository.AccountRepository
 import com.project.goms.domain.auth.presentation.data.dto.SignInDto
 import com.project.goms.domain.auth.presentation.data.dto.TokenDto
 import com.project.goms.domain.auth.presentation.data.enums.Authority
