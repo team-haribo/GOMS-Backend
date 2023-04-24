@@ -20,35 +20,34 @@ class JwtGenerator(
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ) {
 
-    fun generateToken(sub: UUID, authority: Authority): TokenDto =
+    fun generateToken(accountIdx: UUID, authority: Authority): TokenDto =
         TokenDto(
-            accessToken = generateAccessToken(sub, authority),
-            refreshToken = generateRefreshToken(sub, authority),
+            accessToken = generateAccessToken(accountIdx, authority),
+            refreshToken = generateRefreshToken(accountIdx),
             accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
             refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong())
         )
 
-    private fun generateAccessToken(sub: UUID, authority: Authority): String =
+    private fun generateAccessToken(accountIdx: UUID, authority: Authority): String =
         Jwts.builder()
             .signWith(jwtProperties.accessSecret, SignatureAlgorithm.HS256)
-            .setSubject(sub.toString())
+            .setSubject(accountIdx.toString())
             .claim(JwtProperties.TOKEN_TYPE, JwtProperties.ACCESS)
             .claim(JwtProperties.AUTHORITY, authority)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtExpTimeProperties.accessExp * 1000))
             .compact()
 
-    private fun generateRefreshToken(sub: UUID, authority: Authority): String {
+    private fun generateRefreshToken(accountIdx: UUID): String {
         val refreshToken = Jwts.builder()
             .signWith(jwtProperties.accessSecret, SignatureAlgorithm.HS256)
-            .setSubject(sub.toString())
+            .setSubject(accountIdx.toString())
             .claim(JwtProperties.TOKEN_TYPE, JwtProperties.REFRESH)
-            .claim(JwtProperties.AUTHORITY, authority)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtExpTimeProperties.accessExp * 1000))
             .compact()
 
-        refreshTokenRepository.save(RefreshToken(refreshToken, sub, jwtExpTimeProperties.refreshExp))
+        refreshTokenRepository.save(RefreshToken(refreshToken, accountIdx, jwtExpTimeProperties.refreshExp))
         return refreshToken
     }
 
