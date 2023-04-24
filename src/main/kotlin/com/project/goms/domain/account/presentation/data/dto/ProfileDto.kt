@@ -1,8 +1,8 @@
-package com.project.goms.domain.account.presentation.data.response
+package com.project.goms.domain.account.presentation.data.dto
 
-import java.util.UUID
+import java.util.*
 
-data class ProfileResponse(
+data class ProfileDto(
     val accountIdx: UUID,
     val studentNum: StudentNum,
     val profileUrl: String?,
