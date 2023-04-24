@@ -25,12 +25,12 @@ class Account(
     val number: Int,
 
     @Column(nullable = false, length = 10)
-    var name: String,
+    val name: String,
 
     @Column(nullable = true, columnDefinition = "TEXT")
-    var profileUrl: String?,
+    val profileUrl: String?,
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var authority: Authority
+    val authority: Authority
 ): BaseIdxEntity(idx)
