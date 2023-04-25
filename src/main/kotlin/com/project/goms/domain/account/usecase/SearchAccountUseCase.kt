@@ -16,11 +16,15 @@ class SearchAccountUseCase(
         accountRepository.findAllByOrderByGradeAscClassNumAscNumberAsc()
             .asSequence()
             .filter {
-                it.name == name
+                if (grade != null) it.grade == grade else true
             }.filter {
-                it.grade == grade
+                if (classNum != null) it.classNum == classNum else true
             }.filter {
-                it.classNum == classNum
+                if (!name.isNullOrBlank()) it.name == name else true
+            }.filter {
+                if (isBlackList != null) outingBlackListRepository.existsById(it.idx) == isBlackList else true
+            }.filter {
+                if (authority != null) it.authority == authority else true
             }.map {
                 AccountDto(
                     accountIdx = it.idx,
