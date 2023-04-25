@@ -33,7 +33,7 @@ class ExceptionHandlerFilter: OncePerRequestFilter() {
         response.status = errorCode.status.value()
         response.contentType = "application/json"
         response.characterEncoding = "utf-8"
-        val errorResponse = ErrorResponse(errorCode.message, errorCode.status)
+        val errorResponse = ErrorResponse(errorCode.message, errorCode.status.value())
         val errorResponseToJson = ObjectMapper().writeValueAsString(errorResponse)
         response.writer.write(errorResponseToJson)
     }
