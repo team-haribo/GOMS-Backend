@@ -10,7 +10,7 @@ class QueryAllAccountUseCase(
 ) {
 
     fun execute() =
-        accountRepository.findAllByOrderByGradeDescClassNumDescNumberDesc()
+        accountRepository.findAllByOrderByGradeAscClassNumAscNumberAsc()
             .map {
                 AccountDto(
                     accountIdx = it.idx,

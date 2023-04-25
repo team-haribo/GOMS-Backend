@@ -13,7 +13,7 @@ class SearchAccountUseCase(
 ) {
 
     fun execute(grade: Int, classNum: Int, name: String, isBlackList: Boolean, authority: Authority): List<AccountDto> =
-        accountRepository.findAllByOrderByGradeDescClassNumDescNumberDesc()
+        accountRepository.findAllByOrderByGradeAscClassNumAscNumberAsc()
             .asSequence()
             .filter { it.grade == grade }
             .filter { it.classNum == classNum }

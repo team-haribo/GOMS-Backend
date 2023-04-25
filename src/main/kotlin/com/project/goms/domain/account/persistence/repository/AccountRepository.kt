@@ -8,6 +8,6 @@ interface AccountRepository: CrudRepository<Account, UUID> {
 
     fun existsByEmail(email: String): Boolean
     fun findByEmail(email: String): Account
-    fun findAllByOrderByGradeDescClassNumDescNumberDesc(): List<Account>
+    fun findAllByOrderByGradeAscClassNumAscNumberAsc(): List<Account>
 
 }
