@@ -34,15 +34,6 @@ class JwtParser(
         getAuthority(getTokenBody(accessToken, jwtProperties.accessSecret))
             .let { UsernamePasswordAuthenticationToken(it, "", it.authorities) }
 
-    fun isRefreshTokenExpired(refreshToken: String): Boolean {
-        try {
-            getTokenBody(refreshToken, jwtProperties.refreshSecret).expiration
-        } catch (e: ExpiredJwtException) {
-            return true
-        }
-        return false
-    }
-
     fun getTokenBody(token: String, secret: Key): Claims =
         Jwts.parserBuilder()
             .setSigningKey(secret)
