@@ -6,7 +6,6 @@ import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import com.project.goms.global.security.principal.AdminDetailsService
 import com.project.goms.global.security.principal.StudentDetailsService
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
