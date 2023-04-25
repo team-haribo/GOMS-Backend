@@ -4,7 +4,7 @@ import com.project.goms.domain.account.persistence.entity.Account
 import com.project.goms.domain.account.persistence.repository.AccountRepository
 import com.project.goms.domain.auth.presentation.data.dto.SignInDto
 import com.project.goms.domain.auth.presentation.data.dto.TokenDto
-import com.project.goms.domain.auth.presentation.data.enums.Authority
+import com.project.goms.domain.account.presentation.data.enums.Authority
 import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.gauth.property.GAuthProperties
 import com.project.goms.global.security.jwt.JwtGenerator

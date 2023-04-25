@@ -1,6 +1,6 @@
 package com.project.goms.global.security.jwt
 
-import com.project.goms.domain.auth.presentation.data.enums.Authority
+import com.project.goms.domain.account.presentation.data.enums.Authority
 import com.project.goms.global.security.jwt.common.exception.InvalidTokenException
 import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import com.project.goms.global.security.principal.AdminDetailsService

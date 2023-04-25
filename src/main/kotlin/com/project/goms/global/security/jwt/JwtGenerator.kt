@@ -3,7 +3,7 @@ package com.project.goms.global.security.jwt
 import com.project.goms.domain.auth.persistence.entity.RefreshToken
 import com.project.goms.domain.auth.persistence.repository.RefreshTokenRepository
 import com.project.goms.domain.auth.presentation.data.dto.TokenDto
-import com.project.goms.domain.auth.presentation.data.enums.Authority
+import com.project.goms.domain.account.presentation.data.enums.Authority
 import com.project.goms.global.security.jwt.common.properties.JwtExpTimeProperties
 import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import io.jsonwebtoken.Jwts
@@ -20,13 +20,21 @@ class JwtGenerator(
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ) {
 
-    fun generateToken(accountIdx: UUID, authority: Authority): TokenDto =
-        TokenDto(
-            accessToken = generateAccessToken(accountIdx, authority),
-            refreshToken = generateRefreshToken(accountIdx),
+    fun generateToken(accountIdx: UUID, authority: Authority): TokenDto {
+
+        val accessToken = generateAccessToken(accountIdx, authority)
+        val refreshToken = generateRefreshToken(accountIdx)
+
+        println(accessToken)
+        println(refreshToken)
+
+        return TokenDto(
+            accessToken = accessToken,
+            refreshToken = refreshToken,
             accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
             refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong())
         )
+    }
 
     private fun generateAccessToken(accountIdx: UUID, authority: Authority): String =
         Jwts.builder()
