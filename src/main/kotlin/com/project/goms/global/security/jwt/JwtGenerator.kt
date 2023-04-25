@@ -20,21 +20,13 @@ class JwtGenerator(
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ) {
 
-    fun generateToken(accountIdx: UUID, authority: Authority): TokenDto {
-
-        val accessToken = generateAccessToken(accountIdx, authority)
-        val refreshToken = generateRefreshToken(accountIdx)
-
-        println(accessToken)
-        println(refreshToken)
-
-        return TokenDto(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
+    fun generateToken(accountIdx: UUID, authority: Authority): TokenDto =
+        TokenDto(
+            accessToken = generateAccessToken(accountIdx, authority),
+            refreshToken = generateRefreshToken(accountIdx),
             accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
             refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong())
         )
-    }
 
     private fun generateAccessToken(accountIdx: UUID, authority: Authority): String =
         Jwts.builder()
