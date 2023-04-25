@@ -19,6 +19,7 @@ class AccountConverterImpl : AccountConverter {
         dto.let {
             ProfileResponse(
                 accountIdx = it.accountIdx,
+                name = it.name,
                 studentNum = ProfileResponse.StudentNum(
                     it.studentNum.grade,
                     it.studentNum.classNum,
@@ -33,6 +34,7 @@ class AccountConverterImpl : AccountConverter {
         dto.map {
             AccountResponse(
                 accountIdx = it.accountIdx,
+                name = it.name,
                 studentNum = AccountResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
                 profileUrl = it.profileUrl,
                 authority = it.authority

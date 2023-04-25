@@ -2,6 +2,7 @@ package com.project.goms.domain.outing.presentation
 
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
+import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
@@ -32,8 +33,9 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("count")
-    fun queryOutingCount(): ResponseEntity<Long> =
+    fun queryOutingCount(): ResponseEntity<OutingCountResponse> =
         queryOutingCountUseCase.execute()
+            .let { outingConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }

@@ -14,6 +14,7 @@ class QueryAllAccountUseCase(
             .map {
                 AccountDto(
                     accountIdx = it.idx,
+                    name = it.name,
                     studentNum = AccountDto.StudentNum(it.grade, it.classNum, it.number),
                     profileUrl = it.profileUrl,
                     authority = it.authority

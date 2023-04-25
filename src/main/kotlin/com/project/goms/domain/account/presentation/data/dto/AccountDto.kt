@@ -5,6 +5,7 @@ import java.util.*
 
 data class AccountDto(
     val accountIdx: UUID,
+    val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
     val authority: Authority

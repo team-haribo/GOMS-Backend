@@ -4,6 +4,7 @@ import java.util.UUID
 
 data class ProfileResponse(
     val accountIdx: UUID,
+    val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
     val rateCount: Long

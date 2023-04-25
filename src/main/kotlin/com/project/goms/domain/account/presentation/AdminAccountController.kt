@@ -33,11 +33,11 @@ class AdminAccountController(
 
     @GetMapping("search")
     fun searchAccount(
-        @RequestParam grade: Int,
-        @RequestParam classNum: Int,
-        @RequestParam name: String,
-        @RequestParam isBlackList: Boolean,
-        @RequestParam authority: Authority
+        @RequestParam grade: Int?,
+        @RequestParam classNum: Int?,
+        @RequestParam name: String?,
+        @RequestParam isBlackList: Boolean?,
+        @RequestParam authority: Authority?
     ): ResponseEntity<List<AccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
             .let { accountConverter.toResponse(it) }

@@ -12,17 +12,19 @@ class SearchAccountUseCase(
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
-    fun execute(grade: Int, classNum: Int, name: String, isBlackList: Boolean, authority: Authority): List<AccountDto> =
+    fun execute(grade: Int?, classNum: Int?, name: String?, isBlackList: Boolean?, authority: Authority?): List<AccountDto> =
         accountRepository.findAllByOrderByGradeAscClassNumAscNumberAsc()
             .asSequence()
-            .filter { it.grade == grade }
-            .filter { it.classNum == classNum }
-            .filter { it.name == name }
-            .filter { outingBlackListRepository.existsById(it.idx) }
-            .filter { it.authority == authority }
-            .map {
+            .filter {
+                it.name == name
+            }.filter {
+                it.grade == grade
+            }.filter {
+                it.classNum == classNum
+            }.map {
                 AccountDto(
                     accountIdx = it.idx,
+                    name = it.name,
                     studentNum = AccountDto.StudentNum(it.grade, it.classNum, it.number),
                     profileUrl = it.profileUrl,
                     authority = it.authority
