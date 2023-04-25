@@ -1,8 +1,8 @@
-package com.project.goms.domain.rate.presentation.data.response
+package com.project.goms.domain.late.presentation.data.response
 
 import java.util.*
 
-data class RateRankResponse(
+data class LateRankResponse(
     val accountIdx: UUID,
     val studentNum: StudentNum,
     val profileUrl: String?,

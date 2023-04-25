@@ -1,8 +1,8 @@
-package com.project.goms.domain.rate.presentation.data.dto
+package com.project.goms.domain.late.presentation.data.dto
 
 import java.util.*
 
-data class RateRankDto(
+data class LateRankDto(
     val accountIdx: UUID,
     val studentNum: StudentNum,
     val profileUrl: String?,
