@@ -18,7 +18,8 @@ class AuthConverterImpl: AuthConverter {
             accessToken = dto.accessToken,
             refreshToken = dto.refreshToken,
             accessTokenExp = dto.accessTokenExp,
-            refreshTokenExp = dto.refreshTokenExp
+            refreshTokenExp = dto.refreshTokenExp,
+            authority = dto.authority
         )
 
 }

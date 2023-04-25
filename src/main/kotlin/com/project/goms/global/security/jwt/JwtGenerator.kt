@@ -25,7 +25,8 @@ class JwtGenerator(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
             accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
-            refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong())
+            refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
+            authority = authority
         )
 
     private fun generateAccessToken(accountIdx: UUID, authority: Authority): String =
