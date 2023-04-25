@@ -33,7 +33,7 @@ class AdminAccountController(
     fun grantAuthority(@RequestBody request: GrantAuthorityRequest): ResponseEntity<Void> =
         accountConverter.toDto(request)
             .let { grantAuthorityUseCase.execute(it) }
-            .let { ResponseEntity.ok().build() }
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping("search")
     fun searchAccount(
