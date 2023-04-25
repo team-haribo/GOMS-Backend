@@ -11,7 +11,7 @@ class AdminDetails(
 ): UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
-        mutableListOf(SimpleGrantedAuthority(Authority.ROLE_STUDENT.name))
+        mutableListOf(SimpleGrantedAuthority(Authority.ROLE_ADMIN.name))
 
     override fun getPassword(): String? = null
 
