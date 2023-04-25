@@ -57,6 +57,10 @@ dependencies {
 	// GAuth
 	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0")
 
+	// Feign
+	implementation("io.github.openfeign:feign-httpclient:11.9.1")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4")
+
 }
 
 tasks.withType<KotlinCompile> {
