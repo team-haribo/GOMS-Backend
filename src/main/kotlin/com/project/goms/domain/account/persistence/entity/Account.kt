@@ -1,14 +1,13 @@
 package com.project.goms.domain.account.persistence.entity
 
-import com.project.goms.domain.auth.presentation.data.enums.Authority
-import com.project.goms.global.entity.BaseIdxEntity
+import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.global.entity.BaseUUIDEntity
 import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "tbl_account")
 class Account(
-    @Id
     @Column(name = "account_idx")
     override val idx: UUID,
 
@@ -32,5 +31,9 @@ class Account(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val authority: Authority
-): BaseIdxEntity(idx)
+    var authority: Authority
+): BaseUUIDEntity(idx)
+
+fun Account.updateAuthority(newAuthority: Authority) {
+    authority = newAuthority
+}
