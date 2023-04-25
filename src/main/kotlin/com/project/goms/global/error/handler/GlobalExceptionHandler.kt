@@ -13,7 +13,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(GomsException::class)
     fun handler(e: GomsException): ResponseEntity<ErrorResponse> =
         ResponseEntity(
-            ErrorResponse(e.errorCode.message, e.errorCode.status),
+            ErrorResponse(e.errorCode.message, e.errorCode.status.value()),
             HttpStatus.valueOf(e.errorCode.status.name)
         )
 
