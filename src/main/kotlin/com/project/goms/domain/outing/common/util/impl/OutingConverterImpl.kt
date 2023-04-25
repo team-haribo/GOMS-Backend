@@ -5,6 +5,7 @@ import com.project.goms.domain.outing.persistence.entity.Outing
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.dto.OutingAccountDto
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
+import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -22,5 +23,8 @@ class OutingConverterImpl : OutingConverter {
                 it.profileUrl
             )
         }
+
+    override fun toResponse(outingCount: Long): OutingCountResponse =
+        OutingCountResponse(outingCount = outingCount)
 
 }
