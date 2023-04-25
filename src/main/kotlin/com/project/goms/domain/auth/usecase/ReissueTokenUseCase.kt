@@ -8,7 +8,7 @@ import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.security.jwt.JwtGenerator
 import com.project.goms.global.security.jwt.JwtParser
 import com.project.goms.global.security.jwt.common.exception.ExpiredRefreshTokenException
-import com.project.goms.global.security.jwt.common.exception.InvalidTokenException
+import com.project.goms.global.security.jwt.common.exception.InvalidTokenTypeException
 import org.springframework.data.repository.findByIdOrNull
 
 @UseCaseWithTransaction
@@ -20,7 +20,7 @@ class ReissueTokenUseCase(
 ) {
 
     fun execute(refreshToken: String): TokenDto {
-        val parsedRefreshToken = jwtParser.parseRefreshToken(refreshToken) ?: throw InvalidTokenException()
+        val parsedRefreshToken = jwtParser.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
         val refreshTokenEntity = refreshTokenRepository.findByIdOrNull(parsedRefreshToken) ?: throw ExpiredRefreshTokenException()
         val account = accountRepository.findByIdOrNull(refreshTokenEntity.accountIdx) ?: throw AccountNotFoundException()
 
