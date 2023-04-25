@@ -45,9 +45,8 @@ class SecurityConfiguration(
             // /admin
             .mvcMatchers(HttpMethod.GET, "/api/v1/admin/account").hasAnyAuthority(Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/admin/authority").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.PATCH, "/api/v1/admin/black-list").hasAnyAuthority(Authority.ROLE_ADMIN.name)
+            .mvcMatchers(HttpMethod.POST, "/api/v1/admin/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/admin/search").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-
 
             .anyRequest().denyAll()
             .and()
