@@ -11,7 +11,7 @@ class OutingScheduler(
     private val saveRateStudentUseCase: SaveLateAccountUseCase
 ) {
 
-    @Scheduled(cron = "0 30 18 ? * 3", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 40 18 ? * 3", zone = "Asia/Seoul")
     fun outingTenMinuteAgoScheduler() = sendDiscordUseCase.execute()
 
     @Scheduled(cron = "0 30 7 ? * 3", zone = "Asia/Seoul")
