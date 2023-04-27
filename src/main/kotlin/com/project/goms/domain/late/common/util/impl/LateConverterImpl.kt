@@ -11,9 +11,10 @@ class LateConverterImpl : LateConverter {
     override fun toResponse(dto: List<LateRankDto>): List<LateRankResponse> =
         dto.map {
             LateRankResponse(
-                it.accountIdx,
-                LateRankResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
-                it.profileUrl
+                accountIdx = it.accountIdx,
+                name = it.name,
+                studentNum = LateRankResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
+                profileUrl = it.profileUrl
             )
         }
 

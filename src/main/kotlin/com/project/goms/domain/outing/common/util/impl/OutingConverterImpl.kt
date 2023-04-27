@@ -18,9 +18,10 @@ class OutingConverterImpl : OutingConverter {
     override fun toResponse(dto: List<OutingAccountDto>): List<OutingAccountResponse> =
         dto.map {
             OutingAccountResponse(
-                it.accountIdx,
-                OutingAccountResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
-                it.profileUrl
+                accountIdx = it.accountIdx,
+                name = it.name,
+                studentNum = OutingAccountResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
+                profileUrl = it.profileUrl
             )
         }
 

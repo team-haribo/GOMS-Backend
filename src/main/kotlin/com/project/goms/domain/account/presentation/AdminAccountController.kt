@@ -19,8 +19,8 @@ class AdminAccountController(
     private val accountConverter: AccountConverter,
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val queryAllAccountUseCase: QueryAllAccountUseCase,
+    private val saveBlackListAccountUseCase: SaveBlackListAccountUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
-    private val saveBlackListAccountUseCase: SaveBlackListAccountUseCase
 ) {
 
     @GetMapping("account")
@@ -35,6 +35,11 @@ class AdminAccountController(
             .let { grantAuthorityUseCase.execute(it) }
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
+    @PostMapping("black-list/{accountIdx}")
+    fun grantAuthority(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
+        saveBlackListAccountUseCase.execute(accountIdx)
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
     @GetMapping("search")
     fun searchAccount(
         @RequestParam grade: Int?,
@@ -46,10 +51,5 @@ class AdminAccountController(
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
             .let { accountConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
-
-    @PostMapping("black-list/{accountIdx}")
-    fun grantAuthority(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
-        saveBlackListAccountUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
 }

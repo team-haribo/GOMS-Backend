@@ -19,9 +19,10 @@ class QueryOutingAccountUseCase(
 
         return outing.map {
             OutingAccountDto(
-                it.account.idx,
-                OutingAccountDto.StudentNum(it.account.grade, it.account.classNum, it.account.number),
-                it.account.profileUrl
+                accountIdx = it.account.idx,
+                name = it.account.name,
+                studentNum = OutingAccountDto.StudentNum(it.account.grade, it.account.classNum, it.account.number),
+                profileUrl = it.account.profileUrl
             )
         }
     }

@@ -4,6 +4,7 @@ import java.util.*
 
 data class LateRankResponse(
     val accountIdx: UUID,
+    val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
 ) {

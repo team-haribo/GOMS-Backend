@@ -20,7 +20,8 @@ class QueryLateRankUseCase(
         return lateRank.map {
             LateRankDto(
                 accountIdx = it.account.idx,
-                LateRankDto.StudentNum(it.account.grade, it.account.classNum, it.account.number),
+                name = it.account.name,
+                studentNum = LateRankDto.StudentNum(it.account.grade, it.account.classNum, it.account.number),
                 profileUrl = it.account.profileUrl
             )
         }
