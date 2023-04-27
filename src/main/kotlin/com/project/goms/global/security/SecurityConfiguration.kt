@@ -48,6 +48,7 @@ class SecurityConfiguration(
             .mvcMatchers(HttpMethod.POST, "/api/v1/admin/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/admin/search").hasAnyAuthority(Authority.ROLE_ADMIN.name)
 
+            .mvcMatchers(HttpMethod.GET, "/").permitAll()
             .anyRequest().denyAll()
             .and()
 
