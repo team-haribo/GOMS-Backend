@@ -25,7 +25,7 @@ class JwtGenerator(
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
-            accessTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
+            accessTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(100.toLong()),
             refreshTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
             authority = authority
         )
