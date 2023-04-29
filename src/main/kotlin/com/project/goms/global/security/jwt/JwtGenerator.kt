@@ -9,7 +9,8 @@ import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.util.Date
 import java.util.UUID
 
@@ -24,8 +25,8 @@ class JwtGenerator(
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
-            accessTokenExp = LocalDateTime.now().plusSeconds(100.toLong()),
-            refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
+            accessTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(100.toLong()),
+            refreshTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
             authority = authority
         )
 
