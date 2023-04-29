@@ -19,9 +19,9 @@ jobs:
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           project: sunggil-5125/goms
-            stage: main
-            yaml: >
-              name: goms-backend
+          stage: main
+          yaml: >
+            name: goms-backend
 
             app: java@11
 
