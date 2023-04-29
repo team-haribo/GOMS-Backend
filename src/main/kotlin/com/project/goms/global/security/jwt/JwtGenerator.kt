@@ -24,7 +24,7 @@ class JwtGenerator(
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
-            accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
+            accessTokenExp = LocalDateTime.now().plusSeconds(100.toLong()),
             refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
             authority = authority
         )
