@@ -1,4 +1,4 @@
-package com.project.goms.domain.account.persistence.entity
+package com.project.goms.domain.account.entity
 
 import com.project.goms.domain.account.presentation.data.enums.Authority
 import com.project.goms.global.entity.BaseUUIDEntity

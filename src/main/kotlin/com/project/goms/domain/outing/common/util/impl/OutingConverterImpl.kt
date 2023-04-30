@@ -1,7 +1,7 @@
 package com.project.goms.domain.outing.common.util.impl
 
-import com.project.goms.domain.account.persistence.entity.Account
-import com.project.goms.domain.outing.persistence.entity.Outing
+import com.project.goms.domain.account.entity.Account
+import com.project.goms.domain.outing.entity.Outing
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.dto.OutingAccountDto
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse

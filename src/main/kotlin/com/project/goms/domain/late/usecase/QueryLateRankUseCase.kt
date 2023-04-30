@@ -1,7 +1,7 @@
 package com.project.goms.domain.late.usecase
 
 import com.project.goms.domain.late.common.exception.LateAccountNotFoundException
-import com.project.goms.domain.late.persistence.repository.LateRepository
+import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.domain.late.presentation.data.dto.LateRankDto
 import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
 

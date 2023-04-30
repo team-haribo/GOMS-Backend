@@ -1,7 +1,7 @@
 package com.project.goms.domain.auth.usecase
 
-import com.project.goms.domain.account.persistence.entity.Account
-import com.project.goms.domain.account.persistence.repository.AccountRepository
+import com.project.goms.domain.account.entity.Account
+import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.auth.presentation.data.dto.SignInDto
 import com.project.goms.domain.auth.presentation.data.dto.TokenDto
 import com.project.goms.domain.account.presentation.data.enums.Authority
@@ -33,7 +33,7 @@ class SignInUseCase(
             .let { jwtGenerator.generateToken(it.idx, it.authority) }
     }
 
-    private fun saveAccount(gAuthInfo: GAuthUserInfo) : Account{
+    private fun saveAccount(gAuthInfo: GAuthUserInfo) : Account {
         val account = Account(
             idx = UUID.randomUUID(),
             email = gAuthInfo.email,

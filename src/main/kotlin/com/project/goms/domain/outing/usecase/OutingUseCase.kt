@@ -3,8 +3,8 @@ package com.project.goms.domain.outing.usecase
 import com.project.goms.domain.account.common.util.AccountUtil
 import com.project.goms.domain.outing.common.exception.BlackListNotAllowOutingException
 import com.project.goms.domain.outing.common.util.OutingConverter
-import com.project.goms.domain.outing.persistence.repository.OutingBlackListRepository
-import com.project.goms.domain.outing.persistence.repository.OutingRepository
+import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
+import com.project.goms.domain.outing.entity.repository.OutingRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
 
 @UseCaseWithTransaction

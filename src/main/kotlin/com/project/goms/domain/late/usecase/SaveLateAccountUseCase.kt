@@ -1,10 +1,10 @@
 package com.project.goms.domain.late.usecase
 
-import com.project.goms.domain.outing.persistence.repository.OutingRepository
-import com.project.goms.domain.late.persistence.entity.Late
-import com.project.goms.domain.late.persistence.repository.LateRepository
-import com.project.goms.domain.outing.persistence.entity.OutingBlackList
-import com.project.goms.domain.outing.persistence.repository.OutingBlackListRepository
+import com.project.goms.domain.outing.entity.repository.OutingRepository
+import com.project.goms.domain.late.entity.Late
+import com.project.goms.domain.late.entity.repository.LateRepository
+import com.project.goms.domain.outing.entity.OutingBlackList
+import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
 
 @UseCaseWithTransaction

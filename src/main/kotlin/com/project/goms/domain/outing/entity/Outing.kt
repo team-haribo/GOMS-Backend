@@ -1,6 +1,6 @@
-package com.project.goms.domain.outing.persistence.entity
+package com.project.goms.domain.outing.entity
 
-import com.project.goms.domain.account.persistence.entity.Account
+import com.project.goms.domain.account.entity.Account
 import com.project.goms.global.entity.BaseIdxEntity
 import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate

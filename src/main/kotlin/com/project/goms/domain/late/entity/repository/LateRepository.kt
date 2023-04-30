@@ -1,6 +1,6 @@
-package com.project.goms.domain.late.persistence.repository
+package com.project.goms.domain.late.entity.repository
 
-import com.project.goms.domain.late.persistence.entity.Late
+import com.project.goms.domain.late.entity.Late
 import org.springframework.data.repository.CrudRepository
 import java.util.UUID
 

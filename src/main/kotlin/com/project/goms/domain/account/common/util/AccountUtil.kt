@@ -1,6 +1,6 @@
 package com.project.goms.domain.account.common.util
 
-import com.project.goms.domain.account.persistence.entity.Account
+import com.project.goms.domain.account.entity.Account
 
 interface AccountUtil {
 
