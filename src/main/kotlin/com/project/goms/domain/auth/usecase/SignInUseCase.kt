@@ -29,16 +29,11 @@ class SignInUseCase(
         )
         val gAuthInfo = gAuth.getUserInfo(gAuthToken.accessToken)
 
-        if (!accountRepository.existsByEmail(gAuthInfo.email)) {
-            saveAccount(gAuthInfo)
-        }
-
-        val account = accountRepository.findByEmail(gAuthInfo.email)
-
-        return jwtGenerator.generateToken(account.idx, account.authority)
+        return (accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo))
+            .let { jwtGenerator.generateToken(it.idx, it.authority) }
     }
 
-    private fun saveAccount(gAuthInfo: GAuthUserInfo) {
+    private fun saveAccount(gAuthInfo: GAuthUserInfo) : Account{
         val account = Account(
             idx = UUID.randomUUID(),
             email = gAuthInfo.email,
@@ -49,7 +44,7 @@ class SignInUseCase(
             profileUrl = gAuthInfo.profileUrl,
             authority = Authority.ROLE_STUDENT
         )
-        accountRepository.save(account)
+        return accountRepository.save(account)
     }
 
 
