@@ -13,13 +13,13 @@ class QueryAccountProfileUseCase(
 
     fun execute(): ProfileDto {
         val account = accountUtil.getCurrentAccount()
-        val rateCount = lateRepository.countByAccountIdx(account.idx)
+        val lateCount = lateRepository.countByAccountIdx(account.idx)
         return ProfileDto(
             accountIdx = account.idx,
             name = account.name,
             studentNum = ProfileDto.StudentNum(account.grade, classNum = account.classNum, number = account.number),
             profileUrl = account.profileUrl,
-            rateCount = rateCount
+            lateCount = lateCount
         )
     }
 
