@@ -26,7 +26,7 @@ class AccountConverterImpl : AccountConverter {
                     it.studentNum.number
                 ),
                 profileUrl = it.profileUrl,
-                rateCount = it.rateCount
+                lateCount = it.lateCount
             )
         }
 

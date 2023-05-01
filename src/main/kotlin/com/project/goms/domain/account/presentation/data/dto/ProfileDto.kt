@@ -7,7 +7,7 @@ data class ProfileDto(
     val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
-    val rateCount: Long
+    val lateCount: Long
 ) {
     data class StudentNum(
         val grade: Int,
