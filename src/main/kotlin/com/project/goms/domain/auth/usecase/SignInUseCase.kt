@@ -2,15 +2,16 @@ package com.project.goms.domain.auth.usecase
 
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
+import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.auth.common.exception.GAuthException
 import com.project.goms.domain.auth.presentation.data.dto.SignInDto
 import com.project.goms.domain.auth.presentation.data.dto.TokenDto
-import com.project.goms.domain.account.presentation.data.enums.Authority
 import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.gauth.property.GAuthProperties
 import com.project.goms.global.security.jwt.JwtGenerator
 import gauth.GAuth
 import gauth.GAuthUserInfo
-import java.util.UUID
+import java.util.*
 
 @UseCaseWithTransaction
 class SignInUseCase(
@@ -21,19 +22,25 @@ class SignInUseCase(
 ) {
 
     fun execute(dto: SignInDto): TokenDto {
-        val gAuthToken = gAuth.generateToken(
-            dto.code,
-            gAuthProperties.clientId,
-            gAuthProperties.clientSecret,
-            gAuthProperties.redirectUri
-        )
-        val gAuthInfo = gAuth.getUserInfo(gAuthToken.accessToken)
+        runCatching {
+            gAuth.generateToken(
+                dto.code,
+                gAuthProperties.clientId,
+                gAuthProperties.clientSecret,
+                gAuthProperties.redirectUri
+            )
+        }.onFailure {
+            throw GAuthException()
+        }.onSuccess {
+            val gAuthInfo =  gAuth.getUserInfo(it.accessToken)
+            val account = accountRepository.findByEmail(gAuthInfo.email)  ?: saveAccount(gAuthInfo)
+            return jwtGenerator.generateToken(account.idx, account.authority)
+        }
 
-        return (accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo))
-            .let { jwtGenerator.generateToken(it.idx, it.authority) }
+        throw GAuthException()
     }
 
-    private fun saveAccount(gAuthInfo: GAuthUserInfo) : Account {
+    private fun saveAccount(gAuthInfo: GAuthUserInfo): Account {
         val account = Account(
             idx = UUID.randomUUID(),
             email = gAuthInfo.email,
@@ -46,6 +53,5 @@ class SignInUseCase(
         )
         return accountRepository.save(account)
     }
-
 
 }
