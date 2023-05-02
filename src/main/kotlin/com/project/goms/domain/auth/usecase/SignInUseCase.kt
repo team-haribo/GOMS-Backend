@@ -32,6 +32,7 @@ class SignInUseCase(
         }.onFailure {
             throw GAuthException()
         }.onSuccess {
+            println(it.accessToken)
             val gAuthInfo =  gAuth.getUserInfo(it.accessToken)
             val account = accountRepository.findByEmail(gAuthInfo.email)  ?: saveAccount(gAuthInfo)
             return jwtGenerator.generateToken(account.idx, account.authority)
