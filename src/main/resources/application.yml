@@ -29,6 +29,3 @@ gauth:
   clientId: ${GAUTH_CLIENTID}
   clientSecret: ${CLIENT_SECRET}
   redirectUri: ${REDIRECT_URI}
-
-server:
-  port: 8081
