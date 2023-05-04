@@ -46,7 +46,7 @@ class JwtGenerator(
             .setSubject(accountIdx.toString())
             .claim(JwtProperties.TOKEN_TYPE, JwtProperties.REFRESH)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtExpTimeProperties.accessExp * 1000))
+            .setExpiration(Date(System.currentTimeMillis() + jwtExpTimeProperties.refreshExp * 1000))
             .compact()
 
         refreshTokenRepository.save(RefreshToken(refreshToken, accountIdx, jwtExpTimeProperties.refreshExp))
