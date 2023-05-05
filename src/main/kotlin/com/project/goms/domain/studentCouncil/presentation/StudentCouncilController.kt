@@ -1,22 +1,22 @@
-package com.project.goms.domain.account.presentation
+package com.project.goms.domain.studentCouncil.presentation
 
-import com.project.goms.domain.account.common.util.AccountConverter
-import com.project.goms.domain.account.presentation.data.enums.Authority
-import com.project.goms.domain.account.presentation.data.request.GrantAuthorityRequest
+import com.project.goms.domain.auth.presentation.data.enums.Authority
 import com.project.goms.domain.account.presentation.data.response.AccountResponse
-import com.project.goms.domain.account.usecase.GrantAuthorityUseCase
-import com.project.goms.domain.account.usecase.QueryAllAccountUseCase
-import com.project.goms.domain.account.usecase.SaveBlackListAccountUseCase
-import com.project.goms.domain.account.usecase.SearchAccountUseCase
+import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
+import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
+import com.project.goms.domain.studentCouncil.usecase.GrantAuthorityUseCase
+import com.project.goms.domain.studentCouncil.usecase.QueryAllAccountUseCase
+import com.project.goms.domain.studentCouncil.usecase.SaveBlackListAccountUseCase
+import com.project.goms.domain.studentCouncil.usecase.SearchAccountUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
+import java.util.*
 
 @RestController
-@RequestMapping("/api/v1/admin")
-class AdminAccountController(
-    private val accountConverter: AccountConverter,
+@RequestMapping("/api/v1/student-council")
+class StudentCouncilController(
+    private val studentCouncilConverter: StudentCouncilConverter,
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val queryAllAccountUseCase: QueryAllAccountUseCase,
     private val saveBlackListAccountUseCase: SaveBlackListAccountUseCase,
@@ -26,12 +26,12 @@ class AdminAccountController(
     @GetMapping("account")
     fun queryAllAccount(): ResponseEntity<List<AccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { accountConverter.toResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
     fun grantAuthority(@RequestBody request: GrantAuthorityRequest): ResponseEntity<Void> =
-        accountConverter.toDto(request)
+        studentCouncilConverter.toDto(request)
             .let { grantAuthorityUseCase.execute(it) }
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
@@ -49,7 +49,7 @@ class AdminAccountController(
         @RequestParam authority: Authority?
     ): ResponseEntity<List<AccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
-            .let { accountConverter.toResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }

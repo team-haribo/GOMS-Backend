@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
-class AdminDetailsService(
+class StudentCouncilDetailsService(
     private val accountRepository: AccountRepository
 ) : UserDetailsService {
 
@@ -18,6 +18,6 @@ class AdminDetailsService(
     override fun loadUserByUsername(username: String?): UserDetails =
         accountRepository.findByIdOrNull(UUID.fromString(username))
             .let { it ?: throw AccountNotFoundException() }
-            .let { AdminDetails(it.idx) }
+            .let { StudentCouncilDetails(it.idx) }
 
 }
