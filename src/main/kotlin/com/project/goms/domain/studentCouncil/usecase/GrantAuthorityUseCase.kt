@@ -16,6 +16,7 @@ class GrantAuthorityUseCase(
         val account = accountRepository.findByIdOrNull(dto.accountIdx)
             ?: throw AccountNotFoundException()
         account.updateAuthority(dto.authority)
+        accountRepository.save(account)
     }
 
 }
