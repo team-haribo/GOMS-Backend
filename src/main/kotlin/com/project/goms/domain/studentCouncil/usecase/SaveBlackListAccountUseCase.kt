@@ -1,4 +1,4 @@
-package com.project.goms.domain.account.usecase
+package com.project.goms.domain.studentCouncil.usecase
 
 import com.project.goms.domain.account.common.exception.AccountNotFoundException
 import com.project.goms.domain.account.entity.repository.AccountRepository
@@ -16,7 +16,7 @@ class SaveBlackListAccountUseCase(
 
     fun execute(accountIdx: UUID) {
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
-        val outingBlackList = OutingBlackList(accountIdx = account.idx, blackListTime = 604800)
+        val outingBlackList = OutingBlackList(accountIdx = account.idx, expiredAt = 604800)
         outingBlackListRepository.save(outingBlackList)
     }
 

@@ -1,9 +1,9 @@
 package com.project.goms.global.security.jwt
 
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.account.entity.Authority
 import com.project.goms.global.security.jwt.common.exception.InvalidTokenException
 import com.project.goms.global.security.jwt.common.properties.JwtProperties
-import com.project.goms.global.security.principal.AdminDetailsService
+import com.project.goms.global.security.principal.StudentCouncilDetailsService
 import com.project.goms.global.security.principal.StudentDetailsService
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest
 @Component
 class JwtParser(
     private val studentDetailsService: StudentDetailsService,
-    private val adminDetailsService: AdminDetailsService,
+    private val studentCouncilDetailsService: StudentCouncilDetailsService,
     private val jwtProperties: JwtProperties
 ) {
 
@@ -43,7 +43,7 @@ class JwtParser(
     private fun getAuthority(body: Claims): UserDetails =
         when (body.get(JwtProperties.AUTHORITY, String::class.java)) {
             Authority.ROLE_STUDENT.name -> studentDetailsService.loadUserByUsername(body.subject)
-            Authority.ROLE_ADMIN.name -> adminDetailsService.loadUserByUsername(body.subject)
+            Authority.ROLE_STUDENT_COUNCIL.name -> studentCouncilDetailsService.loadUserByUsername(body.subject)
             else -> throw InvalidTokenException()
         }
 

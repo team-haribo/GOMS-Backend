@@ -1,18 +1,16 @@
 package com.project.goms.global.security.jwt
 
+import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.auth.entity.RefreshToken
 import com.project.goms.domain.auth.entity.repository.RefreshTokenRepository
-import com.project.goms.domain.auth.presentation.data.dto.TokenDto
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.auth.usecase.dto.TokenDto
 import com.project.goms.global.security.jwt.common.properties.JwtExpTimeProperties
 import com.project.goms.global.security.jwt.common.properties.JwtProperties
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.util.Date
-import java.util.UUID
+import java.time.LocalDateTime
+import java.util.*
 
 @Component
 class JwtGenerator(
@@ -25,8 +23,8 @@ class JwtGenerator(
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
-            accessTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
-            refreshTokenExp = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
+            accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
+            refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
             authority = authority
         )
 

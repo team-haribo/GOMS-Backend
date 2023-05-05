@@ -1,6 +1,6 @@
 package com.project.goms.domain.account.presentation.data.response
 
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.account.entity.Authority
 import java.util.*
 
 data class AccountResponse(

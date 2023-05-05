@@ -3,7 +3,7 @@ package com.project.goms.domain.auth.usecase
 import com.project.goms.domain.account.common.exception.AccountNotFoundException
 import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.auth.entity.repository.RefreshTokenRepository
-import com.project.goms.domain.auth.presentation.data.dto.TokenDto
+import com.project.goms.domain.auth.usecase.dto.TokenDto
 import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.security.jwt.JwtGenerator
 import com.project.goms.global.security.jwt.JwtParser

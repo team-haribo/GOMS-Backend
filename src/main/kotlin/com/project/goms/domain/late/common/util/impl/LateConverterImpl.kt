@@ -1,7 +1,7 @@
 package com.project.goms.domain.late.common.util.impl
 
 import com.project.goms.domain.late.common.util.LateConverter
-import com.project.goms.domain.late.presentation.data.dto.LateRankDto
+import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.domain.late.presentation.data.response.LateRankResponse
 import org.springframework.stereotype.Component
 

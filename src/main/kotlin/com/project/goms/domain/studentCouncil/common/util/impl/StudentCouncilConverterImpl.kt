@@ -1,9 +1,9 @@
 package com.project.goms.domain.studentCouncil.common.util.impl
 
-import com.project.goms.domain.account.presentation.data.dto.AccountDto
+import com.project.goms.domain.account.usecase.dto.AccountDto
 import com.project.goms.domain.account.presentation.data.response.AccountResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
-import com.project.goms.domain.studentCouncil.presentation.data.dto.GrantAuthorityDto
+import com.project.goms.domain.studentCouncil.usecase.dto.GrantAuthorityDto
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
 import org.springframework.stereotype.Component
 

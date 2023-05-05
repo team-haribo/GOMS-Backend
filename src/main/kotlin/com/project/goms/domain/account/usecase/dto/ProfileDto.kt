@@ -1,12 +1,13 @@
-package com.project.goms.domain.outing.presentation.data.dto
+package com.project.goms.domain.account.usecase.dto
 
 import java.util.*
 
-data class OutingAccountDto(
+data class ProfileDto(
     val accountIdx: UUID,
     val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
+    val lateCount: Long
 ) {
     data class StudentNum(
         val grade: Int,

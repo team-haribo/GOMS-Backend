@@ -20,7 +20,7 @@ class SaveLateAccountUseCase(
             Late(idx = -1, account = it.account)
         }
         val outingBlackList = outingList.map {
-            OutingBlackList(accountIdx = it.account.idx, blackListTime = 604800)
+            OutingBlackList(accountIdx = it.account.idx, expiredAt = 604800)
         }
         lateRepository.saveAll(lateList)
         outingBlackListRepository.saveAll(outingBlackList)

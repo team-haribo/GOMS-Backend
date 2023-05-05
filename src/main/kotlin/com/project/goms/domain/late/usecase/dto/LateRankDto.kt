@@ -1,13 +1,12 @@
-package com.project.goms.domain.account.presentation.data.dto
+package com.project.goms.domain.late.usecase.dto
 
 import java.util.*
 
-data class ProfileDto(
+data class LateRankDto(
     val accountIdx: UUID,
     val name: String,
     val studentNum: StudentNum,
     val profileUrl: String?,
-    val lateCount: Long
 ) {
     data class StudentNum(
         val grade: Int,

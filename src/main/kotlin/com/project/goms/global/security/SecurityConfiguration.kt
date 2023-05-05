@@ -1,6 +1,6 @@
 package com.project.goms.global.security
 
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.account.entity.Authority
 import com.project.goms.global.filter.config.FilterConfig
 import com.project.goms.global.security.handler.CustomAuthenticationEntryPoint
 import com.project.goms.global.security.jwt.JwtParser
@@ -32,22 +32,21 @@ class SecurityConfiguration(
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/auth").permitAll()
 
             // /account
-            .mvcMatchers(HttpMethod.GET, "/api/v1/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_ADMIN.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /outing
             .mvcMatchers(HttpMethod.POST, "/api/v1/outing").hasAnyAuthority(Authority.ROLE_STUDENT.name)
-            .mvcMatchers(HttpMethod.GET, "/api/v1/outing").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.GET, "/api/v1/outing/count").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_ADMIN.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/outing").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/outing/count").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /late
-            .mvcMatchers(HttpMethod.GET, "/api/v1/late/rank").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_ADMIN.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/late/rank").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
-            // /admin
-            .mvcMatchers(HttpMethod.GET, "/api/v1/admin/account").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.PATCH, "/api/v1/admin/authority").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.POST, "/api/v1/admin/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.GET, "/api/v1/admin/search").hasAnyAuthority(Authority.ROLE_ADMIN.name)
-
+            // /student-council
+            .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/account").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.PATCH, "/api/v1/student-council/authority").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.POST, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/search").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
             .anyRequest().denyAll()
             .and()

@@ -7,7 +7,7 @@ import com.project.goms.domain.account.entity.repository.AccountRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class AccountUtilImpl(

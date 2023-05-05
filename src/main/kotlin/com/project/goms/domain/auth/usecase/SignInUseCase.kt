@@ -2,16 +2,19 @@ package com.project.goms.domain.auth.usecase
 
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
-import com.project.goms.domain.account.presentation.data.enums.Authority
+import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.auth.common.exception.GAuthException
-import com.project.goms.domain.auth.presentation.data.dto.SignInDto
-import com.project.goms.domain.auth.presentation.data.dto.TokenDto
+import com.project.goms.domain.auth.usecase.dto.SignInDto
+import com.project.goms.domain.auth.usecase.dto.TokenDto
 import com.project.goms.global.annotation.UseCaseWithTransaction
 import com.project.goms.global.gauth.property.GAuthProperties
 import com.project.goms.global.security.jwt.JwtGenerator
 import gauth.GAuth
 import gauth.GAuthUserInfo
+import mu.KotlinLogging
 import java.util.*
+
+private val log = KotlinLogging.logger {  }
 
 @UseCaseWithTransaction
 class SignInUseCase(
@@ -32,8 +35,9 @@ class SignInUseCase(
         }.onFailure {
             throw GAuthException()
         }.onSuccess {
-            println(it.accessToken)
+            log.info { "GAuth Token is ${it.accessToken}" }
             val gAuthInfo =  gAuth.getUserInfo(it.accessToken)
+            log.info { "GAuth email is ${gAuthInfo.email}" }
             val account = accountRepository.findByEmail(gAuthInfo.email)  ?: saveAccount(gAuthInfo)
             return jwtGenerator.generateToken(account.idx, account.authority)
         }

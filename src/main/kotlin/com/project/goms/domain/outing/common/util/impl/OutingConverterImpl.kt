@@ -3,7 +3,7 @@ package com.project.goms.domain.outing.common.util.impl
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.outing.entity.Outing
 import com.project.goms.domain.outing.common.util.OutingConverter
-import com.project.goms.domain.outing.presentation.data.dto.OutingAccountDto
+import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import org.springframework.stereotype.Component
@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 class OutingConverterImpl : OutingConverter {
 
     override fun toEntity(account: Account): Outing =
-        Outing(idx = -1, account = account, createdTime = LocalDateTime.now())
+        Outing(idx = -1, account = account)
 
     override fun toResponse(dto: List<OutingAccountDto>): List<OutingAccountResponse> =
         dto.map {

@@ -1,7 +1,7 @@
 package com.project.goms.domain.account.usecase
 
 import com.project.goms.domain.account.common.util.AccountUtil
-import com.project.goms.domain.account.presentation.data.dto.ProfileDto
+import com.project.goms.domain.account.usecase.dto.ProfileDto
 import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
 

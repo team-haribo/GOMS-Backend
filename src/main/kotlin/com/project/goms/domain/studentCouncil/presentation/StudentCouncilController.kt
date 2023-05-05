@@ -1,6 +1,6 @@
 package com.project.goms.domain.studentCouncil.presentation
 
-import com.project.goms.domain.auth.presentation.data.enums.Authority
+import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.account.presentation.data.response.AccountResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
