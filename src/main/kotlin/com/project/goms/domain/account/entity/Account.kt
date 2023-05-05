@@ -1,6 +1,5 @@
 package com.project.goms.domain.account.entity
 
-import com.project.goms.domain.auth.presentation.data.enums.Authority
 import com.project.goms.global.entity.BaseUUIDEntity
 import java.util.*
 import javax.persistence.*
