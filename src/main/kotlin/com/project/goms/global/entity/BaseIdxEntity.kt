@@ -7,4 +7,4 @@ abstract class BaseIdxEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     open val idx: Long
-)
+): BaseTimeEntity()
