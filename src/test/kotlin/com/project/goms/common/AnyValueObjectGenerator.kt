@@ -5,6 +5,7 @@ import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.account.usecase.dto.AccountDto
 import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.util.*
 import kotlin.collections.ArrayList
@@ -41,6 +42,8 @@ object AnyValueObjectGenerator {
             Double::class -> 0.0
             String::class -> ""
             Date::class -> Date(0)
+            LocalDateTime::class -> LocalDateTime.now()
+            ZonedDateTime::class -> ZonedDateTime.now()
             UUID::class -> UUID.randomUUID()
 
             BooleanArray::class -> BooleanArray(0)
@@ -56,8 +59,8 @@ object AnyValueObjectGenerator {
             ArrayList::class -> ArrayList<Any>()
             HashMap::class -> HashMap<Any, Any>()
             HashSet::class -> HashSet<Any>()
+
             Authority::class -> Authority.ROLE_STUDENT
-            ZonedDateTime::class -> ZonedDateTime.now()
 
             ProfileDto.StudentNum::class -> ProfileDto.StudentNum(0, 0, 0)
             LateRankDto.StudentNum::class -> LateRankDto.StudentNum(0, 0, 0)
