@@ -4,11 +4,13 @@ import com.project.goms.common.AnyValueObjectGenerator
 import com.project.goms.domain.account.common.util.AccountUtil
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.outing.common.exception.BlackListNotAllowOutingException
+import com.project.goms.domain.outing.common.exception.OutingUUIDUnverifiedException
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.entity.Outing
 import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.domain.outing.entity.repository.OutingRepository
 import com.project.goms.domain.outing.usecase.OutingUseCase
+import com.project.goms.domain.studentCouncil.entity.repository.OutingUUIDRepository
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.Called
@@ -20,11 +22,13 @@ import java.util.UUID
 class OutingUseCaseTest: BehaviorSpec({
     val outingRepository = mockk<OutingRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
+    val outingUUIDRepository = mockk<OutingUUIDRepository>()
     val outingConverter = mockk<OutingConverter>()
     val accountUtil = mockk<AccountUtil>()
-    val outingUseCase = OutingUseCase(outingRepository, outingBlackListRepository, outingConverter, accountUtil)
+    val outingUseCase = OutingUseCase(outingRepository, outingBlackListRepository, outingUUIDRepository, outingConverter, accountUtil)
 
-    Given("계정이 주어질때") {
+    Given("outingUUID가 주어질때") {
+        val outingUUID = UUID.randomUUID()
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
@@ -33,11 +37,12 @@ class OutingUseCaseTest: BehaviorSpec({
         every { outingConverter.toEntity(account) } returns outing
         every { outingBlackListRepository.existsById(account.idx) } returns false
         every { outingRepository.existsByAccount(account) } returns false
+        every { outingUUIDRepository.existsById(outingUUID) } returns true
         every { outingRepository.save(any()) } returns outing
         every { outingRepository.deleteByAccountIdx(account.idx) } returns Unit
 
         When("첫 외출을 요청할때") {
-            outingUseCase.execute()
+            outingUseCase.execute(outingUUID)
 
             Then("계정이 outing 테이블에 저장이 되어야 한다.") {
                 verify(exactly = 1) { outingRepository.save(any()) }
@@ -46,7 +51,7 @@ class OutingUseCaseTest: BehaviorSpec({
 
         When("외출 요청을 시도 했었던 계정이 요청하면") {
             every { outingRepository.existsByAccount(account) } returns true
-            outingUseCase.execute()
+            outingUseCase.execute(outingUUID)
 
             Then("계정이 outing 테이블에 삭제 되어야 한다.") {
                 verify(exactly = 1) { outingRepository.deleteByAccountIdx(account.idx) }
@@ -63,7 +68,19 @@ class OutingUseCaseTest: BehaviorSpec({
 
             Then("BlackListNotAllowOutingException이 터져야 한다.") {
                 shouldThrow<BlackListNotAllowOutingException> {
-                    outingUseCase.execute()
+                    outingUseCase.execute(outingUUID)
+                }
+            }
+        }
+
+        When("틀린 외출 식별자로 요청한 경우") {
+            every { outingBlackListRepository.existsById(account.idx) } returns false
+            every { outingRepository.existsByAccount(account) } returns false
+            every { outingUUIDRepository.existsById(outingUUID) } returns false
+
+            Then("OutingUUIDUnverifiedException이 터져야 한다.") {
+                shouldThrow<OutingUUIDUnverifiedException> {
+                    outingUseCase.execute(outingUUID)
                 }
             }
         }
