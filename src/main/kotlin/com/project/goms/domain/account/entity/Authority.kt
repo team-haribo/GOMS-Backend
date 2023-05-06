@@ -1,10 +1,8 @@
 package com.project.goms.domain.account.entity
 
-enum class Authority(
-    name: String
-){
+enum class Authority{
 
-    ROLE_STUDENT("학생"),
-    ROLE_STUDENT_COUNCIL("학생회");
+    ROLE_STUDENT,
+    ROLE_STUDENT_COUNCIL;
 
 }
