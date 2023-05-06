@@ -35,7 +35,7 @@ class SecurityConfiguration(
             .mvcMatchers(HttpMethod.GET, "/api/v1/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /outing
-            .mvcMatchers(HttpMethod.POST, "/api/v1/outing").hasAnyAuthority(Authority.ROLE_STUDENT.name)
+            .mvcMatchers(HttpMethod.POST, "/api/v1/outing/{outingUUID}").hasAnyAuthority(Authority.ROLE_STUDENT.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/outing").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/outing/count").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
@@ -43,11 +43,15 @@ class SecurityConfiguration(
             .mvcMatchers(HttpMethod.GET, "/api/v1/late/rank").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /student-council
+            .mvcMatchers(HttpMethod.POST, "/api/v1/student-council/outing").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/account").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/student-council/authority").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/search").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+
+            // /health
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
+
             .anyRequest().denyAll()
             .and()
 
