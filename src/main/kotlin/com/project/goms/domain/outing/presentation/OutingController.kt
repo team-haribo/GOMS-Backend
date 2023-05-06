@@ -7,10 +7,8 @@ import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.UUID
 
 @RestController
 @RequestMapping("api/v1/outing")
@@ -21,9 +19,9 @@ class OutingController(
     private val queryOutingCountUseCase: QueryOutingCountUseCase
 ) {
 
-    @PostMapping
-    fun outing(): ResponseEntity<Void> =
-        outingUseCase.execute()
+    @PostMapping("{outingUUID}")
+    fun outing(@PathVariable outingUUID: UUID): ResponseEntity<Void> =
+        outingUseCase.execute(outingUUID)
             .let { ResponseEntity.ok().build()}
 
     @GetMapping
