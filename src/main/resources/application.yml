@@ -19,6 +19,10 @@ spring:
       hibernate:
         format_sql: true
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 jwt:
   accessSecret: ${JWT_ACCESS_SECRET}
   refreshSecret: ${JWT_REFRESH_SECRET}

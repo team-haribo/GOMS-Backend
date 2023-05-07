@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfiguration(
+class SecurityConfig(
     private val jwtParser: JwtParser
 ) {
 
@@ -51,6 +51,9 @@ class SecurityConfiguration(
 
             // /health
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
+
+            // swagger
+            .mvcMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
 
             .anyRequest().denyAll()
             .and()
