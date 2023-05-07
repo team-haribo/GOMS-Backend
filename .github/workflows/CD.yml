@@ -38,6 +38,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
+      - name: Set up resources/** secrets from s3 bucket
+        run: aws s3 cp --region ap-northeast-2 --acl private s3://goms-server-properties-bucket/application-resource-secret/ ./src/main/resources --recursive
+
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
 
