@@ -41,6 +41,17 @@ jobs:
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
 
+      - name: Deploy
+        run: |
+          aws deploy create-deployment \
+          --application-name goms-app \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name dev \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=project-bucket-v1,bundleType=zip,key=$S3_BUCKET_NAME/$GITHUB_SHA.zip \
+          --region ap-northeast-2 \
+
+
       - name: GOMS Backend CD success Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
