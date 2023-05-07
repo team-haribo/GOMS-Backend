@@ -44,7 +44,7 @@ jobs:
       - name: Deploy
         run: |
           aws deploy create-deployment \
-          --application-name goms-app \
+          --application-name goms-prod-codedeploy \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name dev \
           --file-exists-behavior OVERWRITE \
