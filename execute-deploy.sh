@@ -1,7 +1,7 @@
 REPOSITORY=/home/ec2-user/goms-app
 cd $REPOSITORY
 
-APP_NAME=goms
+APP_NAME=goms-app
 JAR_NAME=$(ls -tr $JAR_REPOSITORY/$APP_NAME-0.0.1-SNAPSHOT.jar | tail -n 1)
 
 CURRENT_PID=$(pgrep -f $APP_NAME)
