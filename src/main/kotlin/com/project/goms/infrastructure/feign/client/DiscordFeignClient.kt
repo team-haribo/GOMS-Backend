@@ -1,6 +1,6 @@
 package com.project.goms.infrastructure.feign.client
 
-import com.project.goms.infrastructure.feign.request.DiscordRequest
+import com.project.goms.infrastructure.discord.usecase.dto.DiscordDto
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody
 interface DiscordFeignClient {
 
     @PostMapping(headers = ["Content-Type: application/x-www-form-urlencoded"])
-    fun sendDiscord(@RequestBody discordRequest: DiscordRequest)
+    fun sendDiscord(@RequestBody discordDto: DiscordDto)
 
 }

@@ -1,7 +1,7 @@
 package com.project.goms.infrastructure.discord.usecase
 
 import com.project.goms.infrastructure.feign.client.DiscordFeignClient
-import com.project.goms.infrastructure.feign.request.DiscordRequest
+import com.project.goms.infrastructure.discord.usecase.dto.DiscordDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -17,7 +17,7 @@ class SendDiscordUseCase(
             content += "> 7시 30분까지 각 반 자리에 앉아 야자감독 선생님께 출석확인을 받은 뒤 이동해주세요.\n"
             content += "> 외출 시 꼭 운동화 착용 부탁드립니다!\n"
 
-        discordFeignClient.sendDiscord(DiscordRequest(content = content))
+        discordFeignClient.sendDiscord(DiscordDto(content = content))
     }
 
 }

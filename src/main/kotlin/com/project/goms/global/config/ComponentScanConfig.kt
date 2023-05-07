@@ -20,4 +20,4 @@ import org.springframework.context.annotation.FilterType
         )
     ]
 )
-class ComponentScanConfiguration
+class ComponentScanConfig
