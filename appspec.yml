@@ -5,12 +5,6 @@ files:
   - source: /
     destination: /home/ec2-user/goms-app
 
-permissions: # codedeploy에서 EC2서버로 넘겨준 파일 모두 ec2-user 권한 부여
-  - object: /home/ec2-user/goms-app/
-    pattern: "**"
-    owner: ec2-user
-    group: ec2-user
-
 hooks:
   ApplicationStart:
     - location: execute-deploy.sh
