@@ -2,6 +2,7 @@ package com.project.goms.domain.account.usecase
 
 import com.project.goms.domain.account.common.util.AccountUtil
 import com.project.goms.domain.account.usecase.dto.ProfileDto
+import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
 
@@ -17,7 +18,7 @@ class QueryAccountProfileUseCase(
         return ProfileDto(
             accountIdx = account.idx,
             name = account.name,
-            studentNum = ProfileDto.StudentNum(account.grade, classNum = account.classNum, number = account.number),
+            studentNum = StudentNumberDto(account.grade, classNum = account.classNum, number = account.number),
             profileUrl = account.profileUrl,
             lateCount = lateCount
         )
