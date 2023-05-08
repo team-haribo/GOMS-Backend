@@ -2,12 +2,10 @@ package com.project.goms.domain.late
 
 import com.project.goms.common.AnyValueObjectGenerator
 import com.project.goms.domain.account.entity.Account
-import com.project.goms.domain.late.common.exception.LateAccountNotFoundException
 import com.project.goms.domain.late.entity.Late
 import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.domain.late.usecase.QueryLateRankUseCase
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -33,16 +31,6 @@ class QueryLateRankUseCaseTest: BehaviorSpec({
 
             Then("result와 List<lankDto>는 같아야 한다.") {
                 result shouldBe listLateRankDto
-            }
-        }
-
-        When("지각한 학생이 없을때 요청을 하면") {
-            every { lateRepository.findTop5ByOrderByAccountDesc() } returns emptyList()
-
-            Then("LateAccountNotFoundException이 터져야 한다.") {
-                shouldThrow<LateAccountNotFoundException> {
-                    queryLateRankUseCase.execute()
-                }
             }
         }
     }

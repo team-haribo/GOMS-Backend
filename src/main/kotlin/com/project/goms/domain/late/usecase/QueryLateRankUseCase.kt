@@ -1,6 +1,5 @@
 package com.project.goms.domain.late.usecase
 
-import com.project.goms.domain.late.common.exception.LateAccountNotFoundException
 import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
@@ -12,10 +11,6 @@ class QueryLateRankUseCase(
 
     fun execute(): List<LateRankDto> {
         val lateRank = lateRepository.findTop5ByOrderByAccountDesc()
-
-        if (lateRank.isEmpty()) {
-            throw LateAccountNotFoundException()
-        }
 
         return lateRank.map {
             LateRankDto(

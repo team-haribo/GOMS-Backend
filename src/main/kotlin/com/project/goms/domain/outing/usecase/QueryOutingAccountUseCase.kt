@@ -1,6 +1,5 @@
 package com.project.goms.domain.outing.usecase
 
-import com.project.goms.domain.outing.common.exception.OutingAccountNotFoundException
 import com.project.goms.domain.outing.entity.repository.OutingRepository
 import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
 import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
@@ -12,10 +11,6 @@ class QueryOutingAccountUseCase(
 
     fun execute(): List<OutingAccountDto> {
         val outing = outingRepository.queryAllByOrderByCreatedTimeDesc()
-
-        if (outing.isEmpty()) {
-            throw OutingAccountNotFoundException()
-        }
 
         return outing.map {
             OutingAccountDto(
