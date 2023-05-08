@@ -39,7 +39,7 @@ class StudentCouncilController(
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PostMapping("black-list/{accountIdx}")
-    fun grantAuthority(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
+    fun saveBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         saveBlackListAccountUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
