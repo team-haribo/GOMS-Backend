@@ -5,13 +5,7 @@ import java.util.*
 data class ProfileDto(
     val accountIdx: UUID,
     val name: String,
-    val studentNum: StudentNum,
+    val studentNum: StudentNumberDto,
     val profileUrl: String?,
     val lateCount: Long
-) {
-    data class StudentNum(
-        val grade: Int,
-        val classNum: Int,
-        val number: Int
-    )
-}
+)

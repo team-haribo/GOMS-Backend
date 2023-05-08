@@ -6,14 +6,7 @@ import java.util.*
 data class AccountDto(
     val accountIdx: UUID,
     val name: String,
-    val studentNum: StudentNum,
+    val studentNum: StudentNumberDto,
     val profileUrl: String?,
     val authority: Authority
-) {
-    data class StudentNum(
-        val grade: Int,
-        val classNum: Int,
-        val number: Int
-    )
-
-}
+)
