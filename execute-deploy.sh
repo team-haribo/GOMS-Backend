@@ -16,4 +16,4 @@ else
 fi
 
 echo "> $JAR_NAME 애플리케이션 실행"
-nohup java -jar $JAR_NAME >> $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar $APP_NAME-0.0.1-SNAPSHOT.jar
