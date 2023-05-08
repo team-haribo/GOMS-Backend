@@ -1,16 +1,11 @@
 package com.project.goms.common
 
-import com.project.goms.domain.account.usecase.dto.ProfileDto
 import com.project.goms.domain.account.entity.Authority
-import com.project.goms.domain.account.usecase.dto.AccountDto
-import com.project.goms.domain.late.usecase.dto.LateRankDto
-import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
+import com.project.goms.domain.account.usecase.dto.StudentNumberDto
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 
@@ -43,6 +38,7 @@ object AnyValueObjectGenerator {
             String::class -> ""
             Date::class -> Date(0)
             LocalDateTime::class -> LocalDateTime.now()
+            LocalDate::class -> LocalDate.now()
             ZonedDateTime::class -> ZonedDateTime.now()
             UUID::class -> UUID.randomUUID()
 
@@ -61,11 +57,7 @@ object AnyValueObjectGenerator {
             HashSet::class -> HashSet<Any>()
 
             Authority::class -> Authority.ROLE_STUDENT
-
-            ProfileDto.StudentNum::class -> ProfileDto.StudentNum(0, 0, 0)
-            LateRankDto.StudentNum::class -> LateRankDto.StudentNum(0, 0, 0)
-            OutingAccountDto.StudentNum::class -> OutingAccountDto.StudentNum(0, 0, 0)
-            AccountDto.StudentNum::class -> AccountDto.StudentNum(0, 0, 0)
+            StudentNumberDto::class -> StudentNumberDto(0, 0, 0)
 
             else -> {
                 throw IllegalArgumentException(
