@@ -2,6 +2,7 @@ package com.project.goms.domain.studentCouncil.common.util.impl
 
 import com.project.goms.domain.account.usecase.dto.AccountDto
 import com.project.goms.domain.account.presentation.data.response.AccountResponse
+import com.project.goms.domain.account.presentation.data.response.StudentNumResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.usecase.dto.GrantAuthorityDto
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
@@ -18,7 +19,7 @@ class StudentCouncilConverterImpl: StudentCouncilConverter {
             AccountResponse(
                 accountIdx = it.accountIdx,
                 name = it.name,
-                studentNum = AccountResponse.StudentNum(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
+                studentNum = StudentNumResponse(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
                 profileUrl = it.profileUrl,
                 authority = it.authority
             )
