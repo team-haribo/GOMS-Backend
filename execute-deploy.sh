@@ -1,8 +1,7 @@
-REPOSITORY=/home/ec2-user/goms-app
+REPOSITORY=/home/ec2-user/goms-app/build/libs
 cd $REPOSITORY
 
 APP_NAME=goms
-JAR_NAME=$(ls -tr $JAR_REPOSITORY/$APP_NAME-0.0.1-SNAPSHOT.jar | tail -n 1)
 
 CURRENT_PID=$(pgrep -f $APP_NAME)
 
@@ -15,5 +14,5 @@ else
   sleep 5
 fi
 
-echo "> $JAR_NAME 애플리케이션 실행"
+echo "> 애플리케이션 실행"
 nohup java -jar $APP_NAME-0.0.1-SNAPSHOT.jar &
