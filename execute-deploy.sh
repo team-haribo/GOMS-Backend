@@ -1,7 +1,7 @@
 REPOSITORY=/home/ec2-user/goms-app/build/libs
 cd $REPOSITORY
 
-APP_NAME=goms
+APP_NAME=goms-0.0.1-SNAPSHOT.jar
 
 CURRENT_PID=$(pgrep -f $APP_NAME)
 
@@ -15,4 +15,4 @@ else
 fi
 
 echo "> 애플리케이션 실행"
-nohup java -jar $APP_NAME-0.0.1-SNAPSHOT.jar &
+nohup java -jar $APP_NAME &
