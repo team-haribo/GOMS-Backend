@@ -16,4 +16,4 @@ else
 fi
 
 echo "> $JAR_NAME 애플리케이션 실행"
-nohup java -jar $APP_NAME-0.0.1-SNAPSHOT.jar
+nohup java -jar $APP_NAME-0.0.1-SNAPSHOT.jar &
