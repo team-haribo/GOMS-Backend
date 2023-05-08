@@ -18,15 +18,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew clean build --no-daemon
-
-      - name: Make zip file
-        run: zip -r ./$GITHUB_SHA.zip .
-        shell: bash
+      - name: Set up JDK 11 job has success
+        if: ${{ success() }}
+        run: echo "🎉 Set up JDK 11 job has success"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -37,6 +31,24 @@ jobs:
 
       - name: Set up resources/** secrets from s3 bucket
         run: aws s3 cp --region ap-northeast-2 --acl private s3://goms-server-properties-bucket/application-resource-secret/ ./src/main/resources --recursive
+
+      - name: Set up secret resources success 🎉
+        if: ${{ success() }}
+        run: echo "🎉 Set up secret resources success"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-daemon
+
+      - name: Build with Gradle job has success
+        if: ${{ success() }}
+        run: echo "🎉 Build with Gradle job has success"
+
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
+        shell: bash
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://goms-server-bucket/$GITHUB_SHA.zip
