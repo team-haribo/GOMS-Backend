@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-    S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,7 +39,7 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 --acl private s3://goms-server-properties-bucket/application-resource-secret/ ./src/main/resources --recursive
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://goms-server-bucket/$GITHUB_SHA.zip
 
       - name: Code Deploy
         run: |
@@ -51,7 +48,7 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name goms-prod-codedeploy \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$S3_BUCKET_NAME/$GITHUB_SHA.zip
+          --s3-location bucket=goms-server-bucket,bundleType=zip,key=goms-server-bucket/$GITHUB_SHA.zip
           --region ap-northeast-2 \
 
       - name: GOMS Backend CD success Discord Notification
