@@ -5,10 +5,9 @@ import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.ApiInfoBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
-import springfox.documentation.service.ApiInfo
-import springfox.documentation.service.ApiKey
-import springfox.documentation.service.Contact
+import springfox.documentation.service.*
 import springfox.documentation.spi.DocumentationType
+import springfox.documentation.spi.service.contexts.SecurityContext
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
@@ -21,11 +20,23 @@ class SwaggerConfig {
         Docket(DocumentationType.OAS_30)
             .apiInfo(apiInfo())
             .securitySchemes(listOf(apiKey()))
+            .securityContexts(listOf(securityContext()))
             .useDefaultResponseMessages(false)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.project.goms.domain"))
             .paths(PathSelectors.ant("/api/**"))
             .build()
+
+    @Bean
+    fun securityContext(): SecurityContext =
+        SecurityContext.builder()
+            .securityReferences(defaultAuth())
+            .operationSelector { true }
+            .build()
+
+    private fun defaultAuth(): List<SecurityReference> =
+        arrayOf(AuthorizationScope("global", "accessEverything"))
+            .let { listOf(SecurityReference("Authorization", it)) }
 
     private fun apiKey() = ApiKey("Authorization", "Authorization", "header")
 
