@@ -5,13 +5,7 @@ import java.util.UUID
 data class ProfileResponse(
     val accountIdx: UUID,
     val name: String,
-    val studentNum: StudentNum,
+    val studentNum: StudentNumResponse,
     val profileUrl: String?,
     val lateCount: Long
-) {
-    data class StudentNum(
-        val grade: Int,
-        val classNum: Int,
-        val number: Int
-    )
-}
+)

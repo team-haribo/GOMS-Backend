@@ -6,13 +6,7 @@ import java.util.*
 data class AccountResponse(
     val accountIdx: UUID,
     val name: String,
-    val studentNum: StudentNum,
+    val studentNum: StudentNumResponse,
     val profileUrl: String?,
     val authority: Authority
-) {
-    data class StudentNum(
-        val grade: Int,
-        val classNum: Int,
-        val number: Int
-    )
-}
+)
