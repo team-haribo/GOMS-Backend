@@ -48,7 +48,7 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name goms-prod-codedeploy \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=goms-server-bucket,bundleType=zip,key=goms-server-bucket/$GITHUB_SHA.zip
+          --s3-location bucket=goms-server-bucket,bundleType=zip,key=goms-server-bucket/$GITHUB_SHA.zip \
           --region ap-northeast-2 \
 
       - name: GOMS Backend CD success Discord Notification
