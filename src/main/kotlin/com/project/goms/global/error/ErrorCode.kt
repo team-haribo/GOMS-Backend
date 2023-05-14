@@ -18,11 +18,7 @@ enum class ErrorCode(
     EXPIRED_REFRESH_TOKEN("만료된 refreshToken 입니다.", HttpStatus.UNAUTHORIZED),
 
     // OUTING
-    OUTING_ACCOUNT_NOT_FOUND("외출한 학생이 없습니다.", HttpStatus.NOT_FOUND),
     BLACKLIST_NOT_ALLOW_OUTING("블랙리스트인 학생은 외출을 할 수 없습니다.", HttpStatus.BAD_REQUEST),
     OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", HttpStatus.BAD_REQUEST),
-
-    // LATE
-    LATE_ACCOUNT_NOT_FOUND("지각 학생이 아직 없습니다.", HttpStatus.NOT_FOUND)
 
 }
