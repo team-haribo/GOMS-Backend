@@ -14,7 +14,7 @@ class OutingScheduler(
 ) {
 
     @Scheduled(cron = "0 40 18 ? * 3") // 매주 수요일 6시 40분에 외출 여부 디스코드를 보낸다.
-    fun outingTenMinuteAgoScheduler() = reminderOutingUseCase.execute()
+    fun sendOutingMessage() = reminderOutingUseCase.execute()
 
     @Scheduled(cron = "0 30 7 ? * 3") // 매주 수요일 7시 30분에 지각자를 저장한다.
     fun checkRateStudent() = saveRateStudentUseCase.execute()
