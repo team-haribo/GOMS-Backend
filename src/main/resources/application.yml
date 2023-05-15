@@ -38,3 +38,6 @@ gauth:
 outing:
   expiredAt:  ${OUTING_EXP}
 
+discord:
+  webhookUrl: ${DISCORD_WEBHOOK_URL}
+
