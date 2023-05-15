@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import
 @EnableFeignClients(basePackages = ["com.project.goms.infrastructure.feign"])
 @Import(FeignClientErrorDecoder::class)
 @Configuration
-class FeignConfiguration {
+class FeignConfig {
 
     @Bean
     @ConditionalOnMissingBean(value = [ErrorDecoder::class])
