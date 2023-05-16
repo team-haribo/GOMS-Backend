@@ -1,7 +1,6 @@
 package com.project.goms.domain.studentCouncil.presentation
 
 import com.project.goms.domain.account.entity.Authority
-import com.project.goms.domain.account.presentation.data.response.AccountResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
 import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
@@ -30,7 +29,7 @@ class StudentCouncilController(
     @GetMapping("account")
     fun queryAllAccount(): ResponseEntity<List<AllAccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { studentCouncilConverter.toAllAccountListResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
@@ -51,9 +50,9 @@ class StudentCouncilController(
         @RequestParam name: String?,
         @RequestParam isBlackList: Boolean?,
         @RequestParam authority: Authority?
-    ): ResponseEntity<List<AccountResponse>> =
+    ): ResponseEntity<List<AllAccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
-            .let { studentCouncilConverter.toAccountListResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
