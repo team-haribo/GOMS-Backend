@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+	kotlin("kapt") version "1.4.10"
 }
 
 allOpen {
@@ -20,6 +21,12 @@ noArg {
 	annotation("javax.persistence.Embeddable")
 }
 
+configurations {
+	compileOnly {
+		extendsFrom(configurations.annotationProcessor.get())
+	}
+}
+
 group = "com.project"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -30,9 +37,11 @@ repositories {
 }
 
 dependencies {
-	/** jpa **/
+	/** jpa, querydsl **/
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	implementation("com.querydsl:querydsl-jpa:5.0.0")
+	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
 	/* DB */
 	implementation("mysql:mysql-connector-java:8.0.32")
