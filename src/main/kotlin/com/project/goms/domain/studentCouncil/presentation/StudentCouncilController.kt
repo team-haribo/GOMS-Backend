@@ -45,11 +45,11 @@ class StudentCouncilController(
 
     @GetMapping("search")
     fun searchAccount(
-        @RequestParam grade: Int?,
-        @RequestParam classNum: Int?,
-        @RequestParam name: String?,
-        @RequestParam isBlackList: Boolean?,
-        @RequestParam authority: Authority?
+        @RequestParam(required = false) grade: Int?,
+        @RequestParam(required = false) classNum: Int?,
+        @RequestParam(required = false) name: String?,
+        @RequestParam(required = false) isBlackList: Boolean?,
+        @RequestParam(required = false) authority: Authority?
     ): ResponseEntity<List<AllAccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
             .let { studentCouncilConverter.toResponse(it) }
