@@ -9,7 +9,6 @@ import java.util.UUID
 interface LateRepository: CrudRepository<Late, UUID> {
 
     fun countByAccountIdx(accountIdx: UUID): Long
-    fun findTop5ByOrderByAccountDesc(): List<Late>
     @Query("select count(*) from late l where l.createdTime = :oneWeekAgo")
     fun lateCountOntWeekAgo(oneWeekAgo: LocalDate): Long
 
