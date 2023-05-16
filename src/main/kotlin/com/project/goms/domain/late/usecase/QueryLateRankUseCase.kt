@@ -4,6 +4,7 @@ import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import com.project.goms.domain.late.entity.repository.LateRepository
 import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
+import org.springframework.data.domain.PageRequest
 
 @UseCaseWithReadOnlyTransaction
 class QueryLateRankUseCase(
@@ -11,7 +12,7 @@ class QueryLateRankUseCase(
 ) {
 
     fun execute(): List<LateRankDto> =
-        lateRepository.findTop5ByOrderByAccountDesc()
+        lateRepository.findDistinctTop5ByOrderByAccountDesc(PageRequest.of(0, 5))
             .map {
                 LateRankDto(
                     accountIdx = it.account.idx,

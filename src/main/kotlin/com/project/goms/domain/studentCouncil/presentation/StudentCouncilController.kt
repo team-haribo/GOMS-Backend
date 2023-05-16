@@ -4,6 +4,7 @@ import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.account.presentation.data.response.AccountResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
+import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
 import com.project.goms.domain.studentCouncil.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -27,9 +28,9 @@ class StudentCouncilController(
             .let { ResponseEntity.ok(mapOf("outingUUID" to it)) }
 
     @GetMapping("account")
-    fun queryAllAccount(): ResponseEntity<List<AccountResponse>> =
+    fun queryAllAccount(): ResponseEntity<List<AllAccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toAllAccountListResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
@@ -52,7 +53,7 @@ class StudentCouncilController(
         @RequestParam authority: Authority?
     ): ResponseEntity<List<AccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toAccountListResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
