@@ -9,6 +9,6 @@ class QueryLateRankUseCase(
     private val customLateRepository: CustomLateRepository
 ) {
 
-    fun execute(): List<LateRankDto> = customLateRepository.findTop5ByOrderByAccountDesc()
+    fun execute(): List<LateRankDto> = customLateRepository.findTop3ByOrderByAccountDesc()
 
 }

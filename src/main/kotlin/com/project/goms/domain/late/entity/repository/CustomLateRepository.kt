@@ -12,7 +12,7 @@ class CustomLateRepository(
     private val queryFactory: JPAQueryFactory
 ) {
 
-    fun findTop5ByOrderByAccountDesc(): List<LateRankDto> =
+    fun findTop3ByOrderByAccountDesc(): List<LateRankDto> =
         queryFactory.from(late)
             .select(
                 Projections.constructor(
@@ -30,7 +30,7 @@ class CustomLateRepository(
             )
             .groupBy(late.account.idx)
             .orderBy(late.account.idx.count().desc())
-            .limit(5)
+            .limit(3)
             .fetch()
 
 }

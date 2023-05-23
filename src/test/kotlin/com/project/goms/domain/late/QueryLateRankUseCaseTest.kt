@@ -19,7 +19,7 @@ class QueryLateRankUseCaseTest: BehaviorSpec({
         val lateRankDto = AnyValueObjectGenerator.anyValueObject<LateRankDto>("accountIdx" to accountIdx)
         val listLateRankDto = listOf(lateRankDto)
 
-        every { customLateRepository.findTop5ByOrderByAccountDesc() } returns listOf(lateRankDto)
+        every { customLateRepository.findTop3ByOrderByAccountDesc() } returns listOf(lateRankDto)
 
         When("지각 랭킹 조회 요청을 하면") {
             val result = queryLateRankUseCase.execute()
