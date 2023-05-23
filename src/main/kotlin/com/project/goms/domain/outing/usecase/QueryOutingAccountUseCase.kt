@@ -17,7 +17,11 @@ class QueryOutingAccountUseCase(
             OutingAccountDto(
                 accountIdx = it.account.idx,
                 name = it.account.name,
-                studentNum = StudentNumberDto(it.account.grade, it.account.classNum, it.account.number),
+                studentNum = StudentNumberDto(
+                    it.account.studentNum.grade,
+                    it.account.studentNum.classNum,
+                    it.account.studentNum.number
+                ),
                 profileUrl = it.account.profileUrl
             )
         }

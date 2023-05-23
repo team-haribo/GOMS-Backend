@@ -3,6 +3,7 @@ package com.project.goms.domain.auth.usecase
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.account.entity.Authority
+import com.project.goms.domain.account.entity.StudentNum
 import com.project.goms.domain.auth.common.exception.GAuthException
 import com.project.goms.domain.auth.usecase.dto.SignInDto
 import com.project.goms.domain.auth.usecase.dto.TokenDto
@@ -14,7 +15,7 @@ import gauth.GAuthUserInfo
 import mu.KotlinLogging
 import java.util.*
 
-private val log = KotlinLogging.logger {  }
+private val log = KotlinLogging.logger { }
 
 @UseCaseWithTransaction
 class SignInUseCase(
@@ -36,9 +37,9 @@ class SignInUseCase(
             throw GAuthException()
         }.onSuccess {
             log.info { "GAuth Token is ${it.accessToken}" }
-            val gAuthInfo =  gAuth.getUserInfo(it.accessToken)
+            val gAuthInfo = gAuth.getUserInfo(it.accessToken)
             log.info { "GAuth email is ${gAuthInfo.email}" }
-            val account = accountRepository.findByEmail(gAuthInfo.email)  ?: saveAccount(gAuthInfo)
+            val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
             return jwtGenerator.generateToken(account.idx, account.authority)
         }
 
@@ -50,9 +51,7 @@ class SignInUseCase(
             idx = UUID.randomUUID(),
             email = gAuthInfo.email,
             name = gAuthInfo.name,
-            grade = gAuthInfo.grade,
-            classNum = gAuthInfo.classNum,
-            number = gAuthInfo.num,
+            studentNum = StudentNum(grade = gAuthInfo.grade, classNum = gAuthInfo.classNum, number = gAuthInfo.num),
             profileUrl = gAuthInfo.profileUrl,
             authority = Authority.ROLE_STUDENT
         )

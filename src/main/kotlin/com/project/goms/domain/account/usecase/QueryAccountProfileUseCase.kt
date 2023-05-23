@@ -18,7 +18,11 @@ class QueryAccountProfileUseCase(
         return ProfileDto(
             accountIdx = account.idx,
             name = account.name,
-            studentNum = StudentNumberDto(account.grade, classNum = account.classNum, number = account.number),
+            studentNum = StudentNumberDto(
+                account.studentNum.grade,
+                classNum = account.studentNum.classNum,
+                number = account.studentNum.number
+            ),
             profileUrl = account.profileUrl,
             lateCount = lateCount
         )

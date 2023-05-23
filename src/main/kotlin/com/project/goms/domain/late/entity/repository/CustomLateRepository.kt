@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository
 import com.querydsl.core.types.Projections
 
 @Repository
-class LateRepositoryImpl(
+class CustomLateRepository(
     private val queryFactory: JPAQueryFactory
-): LateRepositoryCustom {
+) {
 
-    override fun findTop5ByOrderByAccountDesc(): List<LateRankDto> =
+    fun findTop5ByOrderByAccountDesc(): List<LateRankDto> =
         queryFactory.from(late)
             .select(
                 Projections.constructor(
@@ -21,15 +21,16 @@ class LateRepositoryImpl(
                     late.account.name,
                     Projections.constructor(
                         StudentNumberDto::class.java,
-                        late.account.grade,
-                        late.account.classNum,
-                        late.account.number
+                        late.account.studentNum.grade,
+                        late.account.studentNum.classNum,
+                        late.account.studentNum.number
                     ),
                     late.account.profileUrl
                 )
             )
             .groupBy(late.account.idx)
             .orderBy(late.account.idx.count().desc())
+            .limit(5)
             .fetch()
 
 }
