@@ -1,6 +1,7 @@
 package com.project.goms.common
 
 import com.project.goms.domain.account.entity.Authority
+import com.project.goms.domain.account.entity.StudentNum
 import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -57,6 +58,7 @@ object AnyValueObjectGenerator {
             HashSet::class -> HashSet<Any>()
 
             Authority::class -> Authority.ROLE_STUDENT
+            StudentNum::class -> StudentNum(0, 0, 0)
             StudentNumberDto::class -> StudentNumberDto(0, 0, 0)
 
             else -> {
