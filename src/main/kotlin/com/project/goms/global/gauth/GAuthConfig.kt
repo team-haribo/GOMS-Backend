@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class GauthConfiguration {
+class GAuthConfig {
 
     @Bean
     fun gauth(): GAuth = GAuthImpl()
