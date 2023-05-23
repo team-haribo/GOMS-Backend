@@ -9,7 +9,7 @@ enum class ErrorCode(
 
     // ACCOUNT
     ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
-    GAUTH_SERVER_ERROR("유효하지 않은 GAuth 토큰 입니다.", HttpStatus.BAD_REQUEST),
+    GAUTH_SERVER_ERROR("GAuth 서버 오류 입니다.", HttpStatus.BAD_REQUEST),
 
     // TOKEN
     INVALID_TOKEN("유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
