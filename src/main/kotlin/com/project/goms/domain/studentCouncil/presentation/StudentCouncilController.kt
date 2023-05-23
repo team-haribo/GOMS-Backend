@@ -48,10 +48,10 @@ class StudentCouncilController(
         @RequestParam(required = false) grade: Int?,
         @RequestParam(required = false) classNum: Int?,
         @RequestParam(required = false) name: String?,
-        @RequestParam(required = false) isBlackList: Boolean?,
-        @RequestParam(required = false) authority: Authority?
+        @RequestParam(required = false) authority: Authority?,
+        @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountResponse>> =
-        searchAccountUseCase.execute(grade, classNum, name, isBlackList, authority)
+        searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
             .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
