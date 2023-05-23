@@ -1,40 +1,34 @@
 package com.project.goms.domain.studentCouncil.usecase
 
 import com.project.goms.domain.account.entity.Authority
-import com.project.goms.domain.account.entity.repository.AccountRepository
+import com.project.goms.domain.account.entity.repository.CustomAccountRepository
 import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.domain.studentCouncil.usecase.dto.AllAccountDto
 import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
+import kotlin.streams.asSequence
 
 @UseCaseWithReadOnlyTransaction
 class SearchAccountUseCase(
-    private val accountRepository: AccountRepository,
+    private val customAccountRepository: CustomAccountRepository,
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
-    fun execute(grade: Int?, classNum: Int?, name: String?, isBlackList: Boolean?, authority: Authority?): List<AllAccountDto> =
-        accountRepository.findAllByOrderByGradeAscClassNumAscNumberAsc()
-            .asSequence()
+    fun execute(grade: Int?, classNum: Int?, name: String?, authority: Authority?, isBlackList: Boolean?): List<AllAccountDto> {
+        val outingBlacklistIds = outingBlackListRepository.findAll().filterNotNull().map { it.accountIdx }
+
+        return customAccountRepository.findAccountByStudentInfo(grade, classNum, name, authority).stream().asSequence()
             .filter {
-                if (grade != null) it.grade == grade else true
-            }.filter {
-                if (classNum != null) it.classNum == classNum else true
-            }.filter {
-                if (!name.isNullOrBlank()) it.name == name else true
-            }.filter {
-                if (isBlackList != null) outingBlackListRepository.existsById(it.idx) == isBlackList else true
-            }.filter {
-                if (authority != null) it.authority == authority else true
+                if (isBlackList != null) outingBlacklistIds.contains(it.idx) else true
             }.map {
                 AllAccountDto(
                     accountIdx = it.idx,
                     name = it.name,
-                    studentNum = StudentNumberDto(it.grade, it.classNum, it.number),
+                    studentNum = StudentNumberDto(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
                     profileUrl = it.profileUrl,
                     authority = it.authority,
-                    isBlackList = outingBlackListRepository.existsById(it.idx)
+                    isBlackList = outingBlacklistIds.contains(it.idx)
                 )
             }.toList()
-
+    }
 }
