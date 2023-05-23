@@ -7,6 +7,5 @@ import java.util.UUID
 interface AccountRepository: CrudRepository<Account, UUID> {
 
     fun findByEmail(email: String): Account?
-    fun findAllByOrderByGradeAscClassNumAscNumberAsc(): List<Account>
 
 }
