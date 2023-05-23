@@ -1,7 +1,7 @@
 package com.project.goms.domain.late
 
 import com.project.goms.common.AnyValueObjectGenerator
-import com.project.goms.domain.late.entity.repository.LateRepositoryImpl
+import com.project.goms.domain.late.entity.repository.CustomLateRepository
 import com.project.goms.domain.late.usecase.dto.LateRankDto
 import com.project.goms.domain.late.usecase.QueryLateRankUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -11,15 +11,15 @@ import io.mockk.mockk
 import java.util.*
 
 class QueryLateRankUseCaseTest: BehaviorSpec({
-    val lateRepositoryImpl = mockk<LateRepositoryImpl>()
-    val queryLateRankUseCase = QueryLateRankUseCase(lateRepositoryImpl)
+    val customLateRepository = mockk<CustomLateRepository>()
+    val queryLateRankUseCase = QueryLateRankUseCase(customLateRepository)
 
     Given("지각 랭킹 조회하겠다는 마음이 주어질때") {
         val accountIdx = UUID.randomUUID()
         val lateRankDto = AnyValueObjectGenerator.anyValueObject<LateRankDto>("accountIdx" to accountIdx)
         val listLateRankDto = listOf(lateRankDto)
 
-        every { lateRepositoryImpl.findTop5ByOrderByAccountDesc() } returns listOf(lateRankDto)
+        every { customLateRepository.findTop5ByOrderByAccountDesc() } returns listOf(lateRankDto)
 
         When("지각 랭킹 조회 요청을 하면") {
             val result = queryLateRankUseCase.execute()
