@@ -12,14 +12,8 @@ class Account(
     @Column(nullable = false, length = 40)
     val email: String,
 
-    @Column(nullable = false, length = 1)
-    val grade: Int,
-
-    @Column(nullable = false, length = 1)
-    val classNum: Int,
-
-    @Column(nullable = false, length = 2)
-    val number: Int,
+    @Embedded
+    val studentNum: StudentNum,
 
     @Column(nullable = false, length = 10)
     val name: String,
