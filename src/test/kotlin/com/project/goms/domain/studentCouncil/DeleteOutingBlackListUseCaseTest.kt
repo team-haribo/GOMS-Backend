@@ -6,32 +6,32 @@ import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.outing.entity.OutingBlackList
 import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
-import com.project.goms.domain.studentCouncil.usecase.SaveBlackListAccountUseCase
+import com.project.goms.domain.studentCouncil.usecase.DeleteOutingBlackListUseCase
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
-class SaveBlackListAccountUseCaseTest: BehaviorSpec({
+class DeleteOutingBlackListUseCaseTest: BehaviorSpec({
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
-    val saveBlackListAccountUseCase = SaveBlackListAccountUseCase(accountRepository, outingBlackListRepository)
+    val deleteOutingBlackList = DeleteOutingBlackListUseCase(accountRepository, outingBlackListRepository)
 
     Given("accountIdx가 주어질때") {
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
-        val outingBlackList = AnyValueObjectGenerator.anyValueObject<OutingBlackList>("accountIdx" to accountIdx)
 
         every { accountRepository.findByIdOrNull(accountIdx) } returns account
-        every { outingBlackListRepository.save(any()) } returns outingBlackList
+        every { outingBlackListRepository.deleteById(account.idx) } returns Unit
 
-        When("외출 블랙리스트 저장을 요청하면") {
-            saveBlackListAccountUseCase.execute(accountIdx)
+        When("외출 블랙리스트 삭제를 요청하면") {
+            deleteOutingBlackList.execute(accountIdx)
 
-            Then("외출 블랙리스트 테이블에 저장되어야 한다.") {
-                every { outingBlackListRepository.save(any()) } returns outingBlackList
+            Then("외출 블랙리스트 삭제가 되어야 한다.") {
+                verify(exactly = 1) { outingBlackListRepository.deleteById(account.idx) }
             }
         }
 
@@ -40,7 +40,7 @@ class SaveBlackListAccountUseCaseTest: BehaviorSpec({
 
             Then("AccountNotFound가 터져야 한다.") {
                 shouldThrow<AccountNotFoundException> {
-                    saveBlackListAccountUseCase.execute(accountIdx)
+                    deleteOutingBlackList.execute(accountIdx)
                 }
             }
         }

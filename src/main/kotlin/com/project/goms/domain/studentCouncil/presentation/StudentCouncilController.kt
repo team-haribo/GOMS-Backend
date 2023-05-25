@@ -17,7 +17,8 @@ class StudentCouncilController(
     private val createOutingUseCase: CreateOutingUseCase,
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val queryAllAccountUseCase: QueryAllAccountUseCase,
-    private val saveBlackListAccountUseCase: SaveBlackListAccountUseCase,
+    private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
+    private val deleteOutingBlackListUseCase: DeleteOutingBlackListUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
 ) {
 
@@ -40,7 +41,12 @@ class StudentCouncilController(
 
     @PostMapping("black-list/{accountIdx}")
     fun saveBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
-        saveBlackListAccountUseCase.execute(accountIdx)
+        saveOutingBlackListUseCase.execute(accountIdx)
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @DeleteMapping("black-list/{accountIdx}")
+    fun deleteBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
+        deleteOutingBlackListUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping("search")
