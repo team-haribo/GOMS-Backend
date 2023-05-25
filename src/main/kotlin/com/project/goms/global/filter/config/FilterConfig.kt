@@ -2,6 +2,7 @@ package com.project.goms.global.filter.config
 
 import com.project.goms.global.filter.ExceptionHandlerFilter
 import com.project.goms.global.filter.JwtRequestFilter
+import com.project.goms.global.filter.RequestLogFilter
 import com.project.goms.global.security.jwt.JwtParser
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -13,6 +14,7 @@ class FilterConfig(
 ): SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>() {
 
     override fun configure(builder: HttpSecurity) {
+        builder.addFilterBefore(RequestLogFilter(), UsernamePasswordAuthenticationFilter::class.java)
         builder.addFilterBefore(JwtRequestFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
         builder.addFilterBefore(ExceptionHandlerFilter(), JwtRequestFilter::class.java)
     }
