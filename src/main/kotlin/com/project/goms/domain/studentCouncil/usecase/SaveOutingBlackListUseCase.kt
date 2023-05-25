@@ -9,7 +9,7 @@ import org.springframework.data.repository.findByIdOrNull
 import java.util.UUID
 
 @UseCaseWithTransaction
-class SaveBlackListAccountUseCase(
+class SaveOutingBlackListUseCase(
     private val accountRepository: AccountRepository,
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
