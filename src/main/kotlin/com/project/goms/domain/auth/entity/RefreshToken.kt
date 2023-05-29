@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.TimeToLive
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
-@RedisHash("tbl_refresh_token")
+@RedisHash("refresh_token")
 data class RefreshToken(
     @Id
     val refreshToken: String,
