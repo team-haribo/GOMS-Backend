@@ -4,12 +4,14 @@ import com.project.goms.domain.account.common.util.AccountUtil
 import com.project.goms.domain.account.usecase.dto.ProfileDto
 import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import com.project.goms.domain.late.entity.repository.LateRepository
+import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
 
 @UseCaseWithTransaction
 class QueryAccountProfileUseCase(
     private val accountUtil: AccountUtil,
-    private val lateRepository: LateRepository
+    private val lateRepository: LateRepository,
+    private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
     fun execute(): ProfileDto {
@@ -24,7 +26,8 @@ class QueryAccountProfileUseCase(
                 number = account.studentNum.number
             ),
             profileUrl = account.profileUrl,
-            lateCount = lateCount
+            lateCount = lateCount,
+            isBlackList = outingBlackListRepository.existsById(account.idx)
         )
     }
 

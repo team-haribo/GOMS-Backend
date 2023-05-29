@@ -7,5 +7,6 @@ data class ProfileResponse(
     val name: String,
     val studentNum: StudentNumResponse,
     val profileUrl: String?,
-    val lateCount: Long
+    val lateCount: Long,
+    val isBlackList: Boolean
 )

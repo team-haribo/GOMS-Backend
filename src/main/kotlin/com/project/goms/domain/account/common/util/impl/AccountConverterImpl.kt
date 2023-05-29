@@ -20,7 +20,8 @@ class AccountConverterImpl : AccountConverter {
                     it.studentNum.number
                 ),
                 profileUrl = it.profileUrl,
-                lateCount = it.lateCount
+                lateCount = it.lateCount,
+                isBlackList = it.isBlackList
             )
         }
 
