@@ -40,7 +40,7 @@ class JwtGenerator(
 
     private fun generateRefreshToken(accountIdx: UUID): String {
         val refreshToken = Jwts.builder()
-            .signWith(jwtProperties.accessSecret, SignatureAlgorithm.HS256)
+            .signWith(jwtProperties.refreshSecret, SignatureAlgorithm.HS256)
             .setSubject(accountIdx.toString())
             .claim(JwtProperties.TOKEN_TYPE, JwtProperties.REFRESH)
             .setIssuedAt(Date())
