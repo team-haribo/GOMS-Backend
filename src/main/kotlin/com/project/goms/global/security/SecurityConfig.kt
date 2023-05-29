@@ -47,6 +47,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/account").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/student-council/authority").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.DELETE, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/search").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /health
