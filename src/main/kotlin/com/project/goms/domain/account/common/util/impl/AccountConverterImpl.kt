@@ -21,6 +21,7 @@ class AccountConverterImpl : AccountConverter {
                 ),
                 profileUrl = it.profileUrl,
                 lateCount = it.lateCount,
+                isOuting = it.isOuting,
                 isBlackList = it.isBlackList
             )
         }

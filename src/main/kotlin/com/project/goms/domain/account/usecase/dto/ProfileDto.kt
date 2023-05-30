@@ -8,5 +8,6 @@ data class ProfileDto(
     val studentNum: StudentNumberDto,
     val profileUrl: String?,
     val lateCount: Long,
+    val isOuting: Boolean,
     val isBlackList: Boolean
 )
