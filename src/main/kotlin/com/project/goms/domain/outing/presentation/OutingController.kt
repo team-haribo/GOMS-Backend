@@ -6,6 +6,7 @@ import com.project.goms.domain.outing.presentation.data.response.OutingCountResp
 import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.UUID
@@ -22,7 +23,7 @@ class OutingController(
     @PostMapping("{outingUUID}")
     fun outing(@PathVariable outingUUID: UUID): ResponseEntity<Void> =
         outingUseCase.execute(outingUUID)
-            .let { ResponseEntity.ok().build()}
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build()}
 
     @GetMapping
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountResponse>> =

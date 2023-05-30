@@ -37,17 +37,17 @@ class StudentCouncilController(
     fun grantAuthority(@RequestBody request: GrantAuthorityRequest): ResponseEntity<Void> =
         studentCouncilConverter.toDto(request)
             .let { grantAuthorityUseCase.execute(it) }
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @PostMapping("black-list/{accountIdx}")
     fun saveBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         saveOutingBlackListUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @DeleteMapping("black-list/{accountIdx}")
     fun deleteBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingBlackListUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping("search")
     fun searchAccount(
