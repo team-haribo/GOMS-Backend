@@ -10,10 +10,8 @@ import java.util.concurrent.TimeUnit
 @RedisHash("outing_black_list")
 data class OutingBlackList(
     @Id
-    @Indexed
     val accountIdx: UUID,
 
-    @Indexed
     @TimeToLive(unit = TimeUnit.SECONDS)
     val expiredAt: Int
 )
