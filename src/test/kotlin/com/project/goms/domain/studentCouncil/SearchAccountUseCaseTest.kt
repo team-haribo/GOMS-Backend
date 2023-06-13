@@ -24,7 +24,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
         val grade = 0
         val classNum = 0
         val name = ""
-        val isBlackList = false
+        val isBlackList = true
         val authority = Authority.ROLE_STUDENT
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
