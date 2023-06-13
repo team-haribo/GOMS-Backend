@@ -20,7 +20,7 @@ class SearchAccountUseCase(
         return customAccountRepository.findAccountByStudentInfo(grade, classNum, name, authority).stream().asSequence()
             .filter {
                 if (isBlackList != null && isBlackList) outingBlacklistIds.contains(it.idx)
-                else if(isBlackList != null && !isBlackList) outingBlacklistIds.contains(it.idx).not()
+                else if (isBlackList != null) outingBlacklistIds.contains(it.idx).not()
                 else true
             }.map {
                 AllAccountDto(
