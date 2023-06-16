@@ -26,6 +26,7 @@ class OutingBanUseCase(
                 log.info { "이번주 외출 불가능 ㅅㄱ" }
                 outingStatusRepository.save(outingStatus)
             }
+
             false -> {
                 log.info { "이번주 외출 가능" }
                 outingStatusRepository.deleteAll()

@@ -63,8 +63,8 @@ class StudentCouncilController(
             .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @PostMapping("/ban")
-    fun banOuting(@RequestBody outingBanRequest: OutingBanRequest): ResponseEntity<Void> =
+    @PostMapping("/outing/ban")
+    fun outingBan(@RequestBody outingBanRequest: OutingBanRequest): ResponseEntity<Void> =
         studentCouncilConverter.toDto(outingBanRequest)
             .let { outingBanUseCase.execute(it) }
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }

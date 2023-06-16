@@ -4,5 +4,5 @@ import org.jetbrains.annotations.NotNull
 
 data class OutingBanRequest(
     @field:NotNull
-    val status : Boolean
+    val status: Boolean
 )

@@ -18,21 +18,21 @@ class SendDiscordUseCase(
     private val discordFeignClient: DiscordFeignClient,
     private val lateRepository: LateRepository,
     private val outingStatusRepository: OutingStatusRepository
-): SendMessageUseCase {
+) : SendMessageUseCase {
 
     override fun sendMessage() {
         var content = ""
-        var outingStatus: OutingStatus = OutingStatus.OUTING_AVAILABLE
+        var outingStatus: OutingStatus = OutingStatus.AVAILABLE
         val lateOneWeekAgoCount = lateRepository.lateCountOntWeekAgo(LocalDate.now().minusWeeks(1))
 
         log.info { "one week ago late count is $lateOneWeekAgoCount" }
 
-        if (lateOneWeekAgoCount > 2) outingStatus = OutingStatus.OUTING_UNAVAILABLE
-        if (outingStatusRepository.count().toInt() != 0) outingStatus = OutingStatus.OUTING_UNAVAILABLE
+        if (lateOneWeekAgoCount > 2) outingStatus = OutingStatus.UNAVAILABLE
+        if (outingStatusRepository.count().toInt() != 0) outingStatus = OutingStatus.UNAVAILABLE
 
         log.info { outingStatus }
         when (outingStatus) {
-            OutingStatus.OUTING_AVAILABLE -> {
+            OutingStatus.AVAILABLE -> {
                 content = "@everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 금일 수요외출제를 통해 외출을 할 학생들은 반드시 저녁을 먹고 7시부터 자유롭게 외출 해주시고, \n"
@@ -41,7 +41,7 @@ class SendDiscordUseCase(
                 content += "> 외출 시 꼭 운동화 착용 부탁드립니다!\n"
             }
 
-            OutingStatus.OUTING_UNAVAILABLE -> {
+            OutingStatus.UNAVAILABLE -> {
                 content = "@everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 저번주 외출제 지각생이 ${lateOneWeekAgoCount}명이여서 외출제는 진행하지 않습니다. \n"
