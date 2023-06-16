@@ -3,9 +3,11 @@ package com.project.goms.domain.studentCouncil.common.util.impl
 import com.project.goms.domain.account.presentation.data.response.StudentNumResponse
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
+import com.project.goms.domain.studentCouncil.presentation.data.request.OutingBanRequest
 import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
 import com.project.goms.domain.studentCouncil.usecase.dto.AllAccountDto
 import com.project.goms.domain.studentCouncil.usecase.dto.GrantAuthorityDto
+import com.project.goms.domain.studentCouncil.usecase.dto.OutingBanDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -13,6 +15,9 @@ class StudentCouncilConverterImpl: StudentCouncilConverter {
 
     override fun toDto(request: GrantAuthorityRequest): GrantAuthorityDto =
         GrantAuthorityDto(accountIdx = request.accountIdx, authority = request.authority)
+
+    override fun toDto(request: OutingBanRequest): OutingBanDto =
+        OutingBanDto(status = request.status)
 
     override fun toResponse(dto: List<AllAccountDto>): List<AllAccountResponse> =
         dto.map {
