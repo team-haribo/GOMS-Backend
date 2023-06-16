@@ -20,6 +20,7 @@ enum class ErrorCode(
     // OUTING
     BLACKLIST_NOT_ALLOW_OUTING("블랙리스트인 학생은 외출을 할 수 없습니다.", HttpStatus.BAD_REQUEST),
     OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", HttpStatus.BAD_REQUEST),
+    PUBLIC_HOLIDAY_EXCEPTION("오늘은 공휴일 외출하지 않는 날 입니다.", HttpStatus.BAD_REQUEST),
 
     // FEIGN
     FEIGN_BAD_REQUEST("FEIGN Bad Request", HttpStatus.BAD_REQUEST),
