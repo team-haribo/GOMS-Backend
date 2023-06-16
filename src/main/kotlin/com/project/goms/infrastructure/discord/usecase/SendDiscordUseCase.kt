@@ -1,7 +1,10 @@
 package com.project.goms.infrastructure.discord.usecase
 
 import com.project.goms.domain.late.entity.repository.LateRepository
+import com.project.goms.domain.outing.common.exception.PublicHolidayException
+import com.project.goms.domain.outing.entity.OutingStatus
 import com.project.goms.domain.outing.usecase.SendMessageUseCase
+import com.project.goms.domain.studentCouncil.entity.repository.OutingStatusRepository
 import com.project.goms.infrastructure.discord.usecase.dto.DiscordDto
 import com.project.goms.infrastructure.feign.client.DiscordFeignClient
 import mu.KotlinLogging
@@ -13,17 +16,23 @@ private val log = KotlinLogging.logger {}
 @Component
 class SendDiscordUseCase(
     private val discordFeignClient: DiscordFeignClient,
-    private val lateRepository: LateRepository
+    private val lateRepository: LateRepository,
+    private val outingStatusRepository: OutingStatusRepository
 ): SendMessageUseCase {
 
     override fun sendMessage() {
         var content = ""
+        var outingStatus: OutingStatus = OutingStatus.OUTING_AVAILABLE
         val lateOneWeekAgoCount = lateRepository.lateCountOntWeekAgo(LocalDate.now().minusWeeks(1))
 
         log.info { "one week ago late count is $lateOneWeekAgoCount" }
 
-        when (lateOneWeekAgoCount < 3) {
-            true -> {
+        if (lateOneWeekAgoCount > 2) outingStatus = OutingStatus.OUTING_UNAVAILABLE
+        if (outingStatusRepository.count().toInt() != 0) outingStatus = OutingStatus.OUTING_UNAVAILABLE
+
+        log.info { outingStatus }
+        when (outingStatus) {
+            OutingStatus.OUTING_AVAILABLE -> {
                 content = "@everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 금일 수요외출제를 통해 외출을 할 학생들은 반드시 저녁을 먹고 7시부터 자유롭게 외출 해주시고, \n"
@@ -32,11 +41,15 @@ class SendDiscordUseCase(
                 content += "> 외출 시 꼭 운동화 착용 부탁드립니다!\n"
             }
 
-            false -> {
+            OutingStatus.OUTING_UNAVAILABLE -> {
                 content = "@everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 저번주 외출제 지각생이 ${lateOneWeekAgoCount}명이여서 외출제는 진행하지 않습니다. \n"
                 content += "> 오늘 외출하다 걸릴시 무단 외출입니다. \n"
+            }
+
+            OutingStatus.PUBLIC_HOLIDAY -> {
+                throw PublicHolidayException()
             }
         }
 

@@ -23,12 +23,11 @@ class OutingBanUseCase(
                     outingStatusUUID = UUID.randomUUID(),
                     expiredAt = outingStatusExpTimeProperties.expiredAt
                 )
-                log.info { "이번주 외출 가능" }
+                log.info { "이번주 외출 불가능 ㅅㄱ" }
                 outingStatusRepository.save(outingStatus)
             }
-
             false -> {
-                log.info { "이번주 외출 금지 ㅅㄱ" }
+                log.info { "이번주 외출 가능" }
                 outingStatusRepository.deleteAll()
             }
         }
