@@ -13,7 +13,7 @@ class OutingScheduler(
     private val deleteOutingStudentsUseCase: DeleteOutingStudentsUseCase,
 ) {
 
-    @Scheduled(cron = "0 40 18 ? * 3") // 매주 수요일 6시 40분에 외출 여부 디스코드를 보낸다.
+    @Scheduled(cron = "0 20 18 ? * 3") // 매주 수요일 6시 40분에 외출 여부 디스코드를 보낸다.
     fun sendOutingMessage() = reminderOutingUseCase.execute()
 
     @Scheduled(cron = "0 30 7 ? * 3") // 매주 수요일 7시 30분에 지각자를 저장한다.
