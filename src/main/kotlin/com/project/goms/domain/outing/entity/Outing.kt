@@ -15,5 +15,5 @@ class Outing(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_idx")
-    val account: Account,
+    val account: Account
 ): BaseIdxEntity(idx)

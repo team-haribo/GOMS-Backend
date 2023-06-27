@@ -3,6 +3,7 @@ package com.project.goms.domain.studentCouncil.presentation
 import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
+import com.project.goms.domain.studentCouncil.presentation.data.request.OutingBanRequest
 import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
 import com.project.goms.domain.studentCouncil.usecase.*
 import org.springframework.http.HttpStatus
@@ -20,6 +21,7 @@ class StudentCouncilController(
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
     private val deleteOutingBlackListUseCase: DeleteOutingBlackListUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
+    private val outingBanUseCase: OutingBanUseCase
 ) {
 
     @PostMapping("outing")
@@ -60,5 +62,11 @@ class StudentCouncilController(
         searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
             .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PostMapping("/outing/ban")
+    fun outingBan(@RequestBody outingBanRequest: OutingBanRequest): ResponseEntity<Void> =
+        studentCouncilConverter.toDto(outingBanRequest)
+            .let { outingBanUseCase.execute(it) }
+            .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }
