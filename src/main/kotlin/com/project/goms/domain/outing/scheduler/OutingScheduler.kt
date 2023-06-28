@@ -13,13 +13,13 @@ class OutingScheduler(
     private val deleteOutingStudentsUseCase: DeleteOutingStudentsUseCase,
 ) {
 
-    @Scheduled(cron = "0 20 18 ? * 3") // 매주 수요일 6시 40분에 외출 여부 디스코드를 보낸다.
+    @Scheduled(cron = "0 20 18 ? * 3") // 매주 수요일 6시 20분에 외출 여부 디스코드를 보낸다.
     fun sendOutingMessage() = reminderOutingUseCase.execute()
 
-    @Scheduled(cron = "0 30 7 ? * 3") // 매주 수요일 7시 30분에 지각자를 저장한다.
+    @Scheduled(cron = "0 25 19 ? * 3") // 매주 수요일 7시 25분에 지각자를 저장한다.
     fun checkRateStudent() = saveRateStudentUseCase.execute()
 
-    @Scheduled(cron = "0 50 7 ? * 3") // 매주 수요일 7시 50분에 외출자를 삭제한다.
+    @Scheduled(cron = "0 50 19 ? * 3") // 매주 수요일 7시 50분에 외출자를 삭제한다.
     fun deleteOutingStudents() = deleteOutingStudentsUseCase.execute()
 
 }
