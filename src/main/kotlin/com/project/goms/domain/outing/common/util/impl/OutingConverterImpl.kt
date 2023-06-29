@@ -21,7 +21,8 @@ class OutingConverterImpl : OutingConverter {
                 accountIdx = it.accountIdx,
                 name = it.name,
                 studentNum = StudentNumResponse(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
-                profileUrl = it.profileUrl
+                profileUrl = it.profileUrl,
+                createdTime = it.createdTime
             )
         }
 

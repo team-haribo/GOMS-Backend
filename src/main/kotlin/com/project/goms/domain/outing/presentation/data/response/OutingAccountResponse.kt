@@ -1,6 +1,7 @@
 package com.project.goms.domain.outing.presentation.data.response
 
 import com.project.goms.domain.account.presentation.data.response.StudentNumResponse
+import java.time.LocalDateTime
 import java.util.*
 
 data class OutingAccountResponse(
@@ -8,4 +9,5 @@ data class OutingAccountResponse(
     val name: String,
     val studentNum: StudentNumResponse,
     val profileUrl: String?,
+    val createdTime: LocalDateTime
 )
