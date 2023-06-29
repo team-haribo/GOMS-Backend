@@ -43,12 +43,12 @@ class StudentCouncilController(
     @PostMapping("black-list/{accountIdx}")
     fun saveBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         saveOutingBlackListUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @DeleteMapping("black-list/{accountIdx}")
     fun deleteBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingBlackListUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @GetMapping("search")
     fun searchAccount(
@@ -63,8 +63,8 @@ class StudentCouncilController(
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("outing-list/{accountIdx}")
-    fun deleteOutingList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
+    fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingListUseCase.execute(accountIdx)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }
