@@ -62,7 +62,7 @@ class StudentCouncilController(
             .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @DeleteMapping("outing-list/{accountIdx}")
+    @DeleteMapping("outing/{accountIdx}")
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingListUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
