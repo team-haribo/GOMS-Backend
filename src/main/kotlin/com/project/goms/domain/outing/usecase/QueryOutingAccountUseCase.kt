@@ -23,7 +23,7 @@ class QueryOutingAccountUseCase(
                     it.account.studentNum.number
                 ),
                 profileUrl = it.account.profileUrl,
-                createdTime = it.account.createdTime
+                createdTime = it.createdTime
             )
         }
     }
