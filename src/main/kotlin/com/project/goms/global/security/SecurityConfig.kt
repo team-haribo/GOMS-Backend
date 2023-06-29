@@ -49,7 +49,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.POST, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.DELETE, "/api/v1/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/student-council/search").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
-            .mvcMatchers(HttpMethod.DELETE, "/api/v1/student-council/outing-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.DELETE, "/api/v1/student-council/outing/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /health
             .mvcMatchers(HttpMethod.GET, "/").permitAll()

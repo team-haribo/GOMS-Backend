@@ -20,7 +20,7 @@ class StudentCouncilController(
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
     private val deleteOutingBlackListUseCase: DeleteOutingBlackListUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
-    private val deleteOutingListUseCase: DeleteOutingListUseCase
+    private val deleteOutingUseCase: DeleteOutingUseCase
 ) {
 
     @PostMapping("outing")
@@ -64,7 +64,7 @@ class StudentCouncilController(
 
     @DeleteMapping("outing/{accountIdx}")
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
-        deleteOutingListUseCase.execute(accountIdx)
+        deleteOutingUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }

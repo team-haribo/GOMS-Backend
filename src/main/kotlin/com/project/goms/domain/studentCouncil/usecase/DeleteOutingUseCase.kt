@@ -8,7 +8,7 @@ import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
 @UseCaseWithTransaction
-class DeleteOutingListUseCase(
+class DeleteOutingUseCase(
     private val accountRepository: AccountRepository,
     private val outingRepository: OutingRepository
 ) {
