@@ -57,7 +57,7 @@ class SecurityConfig(
             // swagger
             .mvcMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
 
-            .anyRequest().denyAll()
+            .anyRequest().authenticated()
             .and()
 
             .exceptionHandling()
