@@ -10,6 +10,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
+import java.time.LocalDateTime
 import java.util.*
 
 class QueryOutingAccountUseCaseTest: BehaviorSpec({
@@ -17,10 +18,11 @@ class QueryOutingAccountUseCaseTest: BehaviorSpec({
     val queryOutingAccountUseCase = QueryOutingAccountUseCase(outingRepository)
 
     Given("외출자가 생길때") {
+        val createdTime = LocalDateTime.now()
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
-        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
-        val outingAccountDto = AnyValueObjectGenerator.anyValueObject<OutingAccountDto>("accountIdx" to accountIdx)
+        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account, "createdTime" to createdTime)
+        val outingAccountDto = AnyValueObjectGenerator.anyValueObject<OutingAccountDto>("accountIdx" to accountIdx, "createdTime" to createdTime)
 
         every { outingRepository.queryAllByOrderByCreatedTimeDesc() } returns listOf(outing)
 

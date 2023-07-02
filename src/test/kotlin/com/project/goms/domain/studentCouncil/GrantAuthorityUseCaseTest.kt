@@ -6,7 +6,6 @@ import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.studentCouncil.usecase.dto.GrantAuthorityDto
 import com.project.goms.domain.account.entity.Authority
-import com.project.goms.domain.account.entity.updateAuthority
 import com.project.goms.domain.studentCouncil.usecase.GrantAuthorityUseCase
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
