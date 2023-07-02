@@ -12,7 +12,7 @@ import java.util.*
 @Service
 class StudentCouncilDetailsService(
     private val accountRepository: AccountRepository
-) : UserDetailsService {
+): UserDetailsService {
 
     @Transactional(readOnly = true, rollbackFor = [Exception::class])
     override fun loadUserByUsername(username: String?): UserDetails =
