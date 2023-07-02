@@ -1,19 +1,20 @@
 package com.project.goms.domain.outing.entity
 
 import com.project.goms.domain.account.entity.Account
-import com.project.goms.global.entity.BaseIdxEntity
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
+import java.time.LocalDateTime
+import javax.persistence.*
 
 @Entity(name = "outing")
 class Outing(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "outing_idx")
-    override val idx: Long,
+    val idx: Long,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_idx")
     val account: Account,
-): BaseIdxEntity(idx)
+
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6)")
+    val createdTime: LocalDateTime = LocalDateTime.now()
+)

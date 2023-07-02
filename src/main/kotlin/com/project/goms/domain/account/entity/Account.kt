@@ -1,13 +1,17 @@
 package com.project.goms.domain.account.entity
 
-import com.project.goms.global.entity.BaseUUIDEntity
+import org.hibernate.annotations.GenericGenerator
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
 @Entity(name = "account")
 class Account(
-    @Column(name = "account_idx")
-    override val idx: UUID,
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "account_idx", columnDefinition = "BINARY(16)", nullable = false)
+    val idx: UUID,
 
     @Column(nullable = false, length = 40)
     val email: String,
@@ -23,8 +27,11 @@ class Account(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var authority: Authority
-): BaseUUIDEntity(idx)
+    var authority: Authority,
+
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6)")
+    val createdTime: LocalDateTime = LocalDateTime.now()
+)
 
 fun Account.updateAuthority(newAuthority: Authority) {
     authority = newAuthority
