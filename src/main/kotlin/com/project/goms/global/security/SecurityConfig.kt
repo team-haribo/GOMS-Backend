@@ -2,6 +2,7 @@ package com.project.goms.global.security
 
 import com.project.goms.domain.account.entity.Authority
 import com.project.goms.global.filter.config.FilterConfig
+import com.project.goms.global.security.handler.CustomAccessDeniedHandler
 import com.project.goms.global.security.handler.CustomAuthenticationEntryPoint
 import com.project.goms.global.security.jwt.JwtParser
 import org.springframework.context.annotation.Bean
@@ -57,10 +58,13 @@ class SecurityConfig(
             // swagger
             .mvcMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
 
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
             .and()
 
             .exceptionHandling()
+            .accessDeniedHandler(CustomAccessDeniedHandler())
+            .and()
+            .httpBasic()
             .authenticationEntryPoint(CustomAuthenticationEntryPoint())
             .and()
 
