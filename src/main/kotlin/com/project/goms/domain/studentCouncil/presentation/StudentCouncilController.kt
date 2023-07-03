@@ -20,7 +20,8 @@ class StudentCouncilController(
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
     private val deleteOutingBlackListUseCase: DeleteOutingBlackListUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
-    private val deleteOutingUseCase: DeleteOutingUseCase
+    private val deleteOutingUseCase: DeleteOutingUseCase,
+    private val searchOutingUseCase: SearchOutingUseCase
 ) {
 
     @PostMapping("outing")
@@ -66,5 +67,11 @@ class StudentCouncilController(
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @GetMapping("search/outing")
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<AllAccountResponse>> =
+        searchOutingUseCase.execute(name)
+            .let { studentCouncilConverter.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
 
 }
