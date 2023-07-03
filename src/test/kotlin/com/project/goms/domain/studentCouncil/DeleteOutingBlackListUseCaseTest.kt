@@ -4,7 +4,6 @@ import com.project.goms.common.AnyValueObjectGenerator
 import com.project.goms.domain.account.common.exception.AccountNotFoundException
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.domain.account.entity.repository.AccountRepository
-import com.project.goms.domain.outing.entity.OutingBlackList
 import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.domain.studentCouncil.usecase.DeleteOutingBlackListUseCase
 import io.kotest.assertions.throwables.shouldThrow
