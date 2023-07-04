@@ -10,7 +10,7 @@ import com.project.goms.domain.studentCouncil.usecase.dto.SearchOutingDto
 interface StudentCouncilConverter {
 
     fun toDto(request: GrantAuthorityRequest): GrantAuthorityDto
-    fun toResponseAllAccount(dto: List<AllAccountDto>): List<AllAccountResponse>
-    fun toResponseSearchOuting(dto: List<SearchOutingDto>): List<SearchOutingResponse>
+    fun toAllAccountResponse(dto: List<AllAccountDto>): List<AllAccountResponse>
+    fun toSearchOutingResponse(dto: List<SearchOutingDto>): List<SearchOutingResponse>
 
 }

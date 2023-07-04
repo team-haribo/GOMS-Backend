@@ -16,7 +16,7 @@ class StudentCouncilConverterImpl: StudentCouncilConverter {
     override fun toDto(request: GrantAuthorityRequest): GrantAuthorityDto =
         GrantAuthorityDto(accountIdx = request.accountIdx, authority = request.authority)
 
-    override fun toResponseAllAccount(dto: List<AllAccountDto>): List<AllAccountResponse> =
+    override fun toAllAccountResponse(dto: List<AllAccountDto>): List<AllAccountResponse> =
         dto.map {
             AllAccountResponse(
                 accountIdx = it.accountIdx,
@@ -28,7 +28,7 @@ class StudentCouncilConverterImpl: StudentCouncilConverter {
             )
         }
 
-    override fun toResponseSearchOuting(dto: List<SearchOutingDto>): List<SearchOutingResponse> =
+    override fun toSearchOutingResponse(dto: List<SearchOutingDto>): List<SearchOutingResponse> =
         dto.map {
             SearchOutingResponse(
                 accountIdx = it.accountIdx,
