@@ -4,6 +4,7 @@ import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
 import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
+import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
 import com.project.goms.domain.studentCouncil.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -32,7 +33,7 @@ class StudentCouncilController(
     @GetMapping("account")
     fun queryAllAccount(): ResponseEntity<List<AllAccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toResponseAllAccount(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
@@ -60,7 +61,7 @@ class StudentCouncilController(
         @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toResponseAllAccount(it) }
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("outing/{accountIdx}")
@@ -69,9 +70,9 @@ class StudentCouncilController(
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @GetMapping("search/outing")
-    fun searchOuting(@RequestParam name: String): ResponseEntity<List<AllAccountResponse>> =
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
         searchOutingUseCase.execute(name)
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toResponseSearchOuting(it) }
             .let { ResponseEntity.ok(it) }
 
 }
