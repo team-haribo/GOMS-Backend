@@ -4,6 +4,7 @@ import com.project.goms.domain.account.entity.Authority
 import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.request.GrantAuthorityRequest
 import com.project.goms.domain.studentCouncil.presentation.data.response.AllAccountResponse
+import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
 import com.project.goms.domain.studentCouncil.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,7 +21,8 @@ class StudentCouncilController(
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
     private val deleteOutingBlackListUseCase: DeleteOutingBlackListUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
-    private val deleteOutingUseCase: DeleteOutingUseCase
+    private val deleteOutingUseCase: DeleteOutingUseCase,
+    private val searchOutingUseCase: SearchOutingUseCase
 ) {
 
     @PostMapping("outing")
@@ -31,7 +33,7 @@ class StudentCouncilController(
     @GetMapping("account")
     fun queryAllAccount(): ResponseEntity<List<AllAccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toAllAccountResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
@@ -59,12 +61,18 @@ class StudentCouncilController(
         @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
-            .let { studentCouncilConverter.toResponse(it) }
+            .let { studentCouncilConverter.toAllAccountResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("outing/{accountIdx}")
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @GetMapping("search/outing")
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
+        searchOutingUseCase.execute(name)
+            .let { studentCouncilConverter.toSearchOutingResponse(it) }
+            .let { ResponseEntity.ok(it) }
 
 }
