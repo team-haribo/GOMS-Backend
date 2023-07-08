@@ -9,8 +9,10 @@ import com.project.goms.domain.outing.entity.repository.OutingBlackListRepositor
 import com.project.goms.domain.outing.entity.repository.OutingRepository
 import com.project.goms.domain.studentCouncil.entity.repository.OutingUUIDRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalTime
-import java.util.UUID
+import java.util.*
 
 @UseCaseWithTransaction
 class OutingUseCase(
@@ -24,10 +26,13 @@ class OutingUseCase(
     fun execute(outingUUID: UUID) {
         val account = accountUtil.getCurrentAccount()
         val outing = outingConverter.toEntity(account)
+        val currentDate = LocalDate.now()
         val currentTime = LocalTime.now()
 
-        if (currentTime.isAfter(LocalTime.of(18, 50)) && currentTime.isBefore(LocalTime.of(19, 25))) {
-
+        if (currentDate.dayOfWeek != DayOfWeek.WEDNESDAY ||
+            (currentTime.isBefore(LocalTime.of(18, 50)) || currentTime.isAfter(LocalTime.of(19, 25)))) {
+            throw NotAvailableOutingTimeException()
+        } else {
             if (outingBlackListRepository.existsById(account.idx)) {
                 throw BlackListNotAllowOutingException()
             }
@@ -40,9 +45,6 @@ class OutingUseCase(
                 false -> outingRepository.save(outing)
                 true -> outingRepository.deleteByAccountIdx(account.idx)
             }
-
-        } else {
-            throw NotAvailableOutingTimeException()
         }
 
     }
