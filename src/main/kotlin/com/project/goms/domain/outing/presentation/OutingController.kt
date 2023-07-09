@@ -7,18 +7,16 @@ import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
 import com.project.goms.domain.outing.usecase.SearchOutingUseCase
-import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
 import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
+import java.util.*
 
 @RestController
 @RequestMapping("api/v1/outing")
 class OutingController(
     private val outingConverter: OutingConverter,
-    private val studentCouncilConverter: StudentCouncilConverter,
     private val outingUseCase: OutingUseCase,
     private val queryOutingAccountUseCase: QueryOutingAccountUseCase,
     private val queryOutingCountUseCase: QueryOutingCountUseCase,
@@ -33,7 +31,7 @@ class OutingController(
     @GetMapping
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountResponse>> =
         queryOutingAccountUseCase.execute()
-            .let { outingConverter.toResponse(it) }
+            .let { outingConverter.toOutingAccountResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("count")
@@ -45,7 +43,7 @@ class OutingController(
     @GetMapping("search")
     fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
         searchOutingUseCase.execute(name)
-            .let { studentCouncilConverter.toSearchOutingResponse(it) }
+            .let { outingConverter.toSearchOutingResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
