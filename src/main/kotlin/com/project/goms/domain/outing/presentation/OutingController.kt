@@ -6,6 +6,9 @@ import com.project.goms.domain.outing.presentation.data.response.OutingCountResp
 import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
+import com.project.goms.domain.outing.usecase.SearchOutingUseCase
+import com.project.goms.domain.studentCouncil.common.util.StudentCouncilConverter
+import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -15,9 +18,11 @@ import java.util.UUID
 @RequestMapping("api/v1/outing")
 class OutingController(
     private val outingConverter: OutingConverter,
+    private val studentCouncilConverter: StudentCouncilConverter,
     private val outingUseCase: OutingUseCase,
     private val queryOutingAccountUseCase: QueryOutingAccountUseCase,
-    private val queryOutingCountUseCase: QueryOutingCountUseCase
+    private val queryOutingCountUseCase: QueryOutingCountUseCase,
+    private val searchOutingUseCase: SearchOutingUseCase
 ) {
 
     @PostMapping("{outingUUID}")
@@ -35,6 +40,12 @@ class OutingController(
     fun queryOutingCount(): ResponseEntity<OutingCountResponse> =
         queryOutingCountUseCase.execute()
             .let { outingConverter.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("search/outing")
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
+        searchOutingUseCase.execute(name)
+            .let { studentCouncilConverter.toSearchOutingResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }

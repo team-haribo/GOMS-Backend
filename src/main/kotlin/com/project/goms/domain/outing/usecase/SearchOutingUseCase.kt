@@ -1,4 +1,4 @@
-package com.project.goms.domain.studentCouncil.usecase
+package com.project.goms.domain.outing.usecase
 
 import com.project.goms.domain.account.entity.repository.CustomAccountRepository
 import com.project.goms.domain.account.usecase.dto.StudentNumberDto
