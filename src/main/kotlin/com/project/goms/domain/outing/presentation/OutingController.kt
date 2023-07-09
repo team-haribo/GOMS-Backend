@@ -7,7 +7,7 @@ import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
 import com.project.goms.domain.outing.usecase.SearchOutingUseCase
-import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
+import com.project.goms.domain.outing.presentation.data.response.SearchOutingResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
