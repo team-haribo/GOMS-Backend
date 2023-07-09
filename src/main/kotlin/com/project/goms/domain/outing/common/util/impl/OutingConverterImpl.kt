@@ -12,7 +12,7 @@ import com.project.goms.domain.studentCouncil.usecase.dto.SearchOutingDto
 import org.springframework.stereotype.Component
 
 @Component
-class OutingConverterImpl : OutingConverter {
+class OutingConverterImpl: OutingConverter {
 
     override fun toEntity(account: Account): Outing =
         Outing(idx = -1, account = account)
@@ -37,8 +37,7 @@ class OutingConverterImpl : OutingConverter {
                 accountIdx = it.accountIdx,
                 name = it.name,
                 studentNum = StudentNumResponse(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
-                profileUrl = it.profileUrl,
-                authority = it.authority
+                profileUrl = it.profileUrl
             )
         }
 

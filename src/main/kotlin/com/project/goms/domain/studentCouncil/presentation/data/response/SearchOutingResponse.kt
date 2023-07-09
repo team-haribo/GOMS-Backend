@@ -8,6 +8,5 @@ data class SearchOutingResponse(
     val accountIdx: UUID,
     val name: String,
     val studentNum: StudentNumResponse,
-    val profileUrl: String?,
-    val authority: Authority
+    val profileUrl: String?
 )
