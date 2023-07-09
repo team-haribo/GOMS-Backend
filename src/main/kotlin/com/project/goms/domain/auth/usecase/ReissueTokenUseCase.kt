@@ -23,7 +23,7 @@ class ReissueTokenUseCase(
         val parsedRefreshToken = jwtParser.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
         val refreshTokenEntity = refreshTokenRepository.findByIdOrNull(parsedRefreshToken) ?: throw ExpiredRefreshTokenException()
         val account = accountRepository.findByIdOrNull(refreshTokenEntity.accountIdx) ?: throw AccountNotFoundException()
-
+        refreshTokenRepository.deleteById(refreshToken)
         return jwtGenerator.generateToken(account.idx, account.authority)
     }
 
