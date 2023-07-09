@@ -8,6 +8,6 @@ import com.project.goms.domain.studentCouncil.usecase.dto.GrantAuthorityDto
 interface StudentCouncilConverter {
 
     fun toDto(request: GrantAuthorityRequest): GrantAuthorityDto
-    fun toAllAccountResponse(dto: List<AllAccountDto>): List<AllAccountResponse>
+    fun toResponse(dto: List<AllAccountDto>): List<AllAccountResponse>
 
 }

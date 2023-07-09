@@ -14,7 +14,7 @@ class StudentCouncilConverterImpl: StudentCouncilConverter {
     override fun toDto(request: GrantAuthorityRequest): GrantAuthorityDto =
         GrantAuthorityDto(accountIdx = request.accountIdx, authority = request.authority)
 
-    override fun toAllAccountResponse(dto: List<AllAccountDto>): List<AllAccountResponse> =
+    override fun toResponse(dto: List<AllAccountDto>): List<AllAccountResponse> =
         dto.map {
             AllAccountResponse(
                 accountIdx = it.accountIdx,

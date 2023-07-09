@@ -33,7 +33,7 @@ class StudentCouncilController(
     @GetMapping("account")
     fun queryAllAccount(): ResponseEntity<List<AllAccountResponse>> =
         queryAllAccountUseCase.execute()
-            .let { studentCouncilConverter.toAllAccountResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("authority")
@@ -61,7 +61,7 @@ class StudentCouncilController(
         @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountResponse>> =
         searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
-            .let { studentCouncilConverter.toAllAccountResponse(it) }
+            .let { studentCouncilConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("outing/{accountIdx}")
