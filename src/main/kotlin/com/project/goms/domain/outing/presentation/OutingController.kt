@@ -42,7 +42,7 @@ class OutingController(
             .let { outingConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("search/outing")
+    @GetMapping("search")
     fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
         searchOutingUseCase.execute(name)
             .let { studentCouncilConverter.toSearchOutingResponse(it) }
