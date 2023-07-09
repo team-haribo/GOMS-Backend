@@ -8,7 +8,7 @@ import com.project.goms.domain.outing.presentation.data.response.OutingAccountRe
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
 import com.project.goms.domain.studentCouncil.presentation.data.response.SearchOutingResponse
-import com.project.goms.domain.studentCouncil.usecase.dto.SearchOutingDto
+import com.project.goms.domain.outing.usecase.dto.SearchOutingDto
 import org.springframework.stereotype.Component
 
 @Component
