@@ -11,9 +11,10 @@ class ValidateOutingTimeUseCase {
     fun execute() : Boolean{
         val currentDate = LocalDate.now()
         val currentTime = LocalTime.now()
+        val startTime = LocalTime.of(18, 50)
+        val endTime = LocalTime.of(19, 25)
 
-        if (currentDate.dayOfWeek != DayOfWeek.WEDNESDAY ||
-            (currentTime.isBefore(LocalTime.of(18, 50)) || currentTime.isAfter(LocalTime.of(19, 25)))) {
+        if (currentDate.dayOfWeek != DayOfWeek.WEDNESDAY || (currentTime.isBefore(startTime) || currentTime.isAfter(endTime))) {
             return false
         }
         return true
