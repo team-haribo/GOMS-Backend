@@ -24,7 +24,7 @@ class OutingController(
     @PostMapping("{outingUUID}")
     fun outing(@PathVariable outingUUID: UUID): ResponseEntity<Void> =
         outingUseCase.execute(outingUUID)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build()}
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountResponse>> =
@@ -45,7 +45,7 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("validation")
-    fun validateOuting() : ResponseEntity<Boolean> =
+    fun validateOuting(): ResponseEntity<Boolean> =
         validateOutingTimeUseCase.execute()
             .let { ResponseEntity.ok(it) }
 
