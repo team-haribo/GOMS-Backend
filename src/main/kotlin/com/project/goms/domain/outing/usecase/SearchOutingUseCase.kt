@@ -11,7 +11,7 @@ class SearchOutingUseCase(
 ) {
 
     fun execute(name: String): List<OutingAccountDto> {
-         return outingRepository.findByAccountNameContaining(name)
+         return outingRepository.queryByAccountNameContaining(name)
              .map {
                  OutingAccountDto(
                     accountIdx = it.account.idx,
