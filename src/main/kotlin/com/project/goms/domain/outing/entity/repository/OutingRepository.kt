@@ -10,6 +10,6 @@ interface OutingRepository: CrudRepository<Outing, UUID> {
     fun existsByAccount(account: Account): Boolean
     fun queryAllByOrderByCreatedTimeDesc(): List<Outing>
     fun deleteByAccountIdx(accountIdx: UUID)
-    fun findByAccount_NameContaining(name: String): List<Outing>
+    fun findByAccountNameContaining(name: String): List<Outing>
 
 }
