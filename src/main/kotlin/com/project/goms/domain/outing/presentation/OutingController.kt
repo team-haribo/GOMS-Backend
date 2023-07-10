@@ -29,7 +29,7 @@ class OutingController(
     @GetMapping
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountResponse>> =
         queryOutingAccountUseCase.execute()
-            .let { outingConverter.toOutingAccountResponse(it) }
+            .let { outingConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("count")
@@ -39,9 +39,9 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("search")
-    fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<OutingAccountResponse>> =
         searchOutingUseCase.execute(name)
-            .let { outingConverter.toSearchOutingResponse(it) }
+            .let { outingConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("validation")
