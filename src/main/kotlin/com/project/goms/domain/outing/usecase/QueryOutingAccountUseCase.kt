@@ -14,7 +14,6 @@ class QueryOutingAccountUseCase(
         val outing = outingRepository.queryAllByOrderByCreatedTimeDesc()
 
         return outing.map {
-            val createdTime = it.createdTime
             OutingAccountDto(
                 accountIdx = it.account.idx,
                 name = it.account.name,
@@ -24,7 +23,7 @@ class QueryOutingAccountUseCase(
                     it.account.studentNum.number
                 ),
                 profileUrl = it.account.profileUrl,
-                createdTime = createdTime.hour.toString() + ":" + createdTime.minute
+                createdTime = it.createdTime
             )
         }
     }
