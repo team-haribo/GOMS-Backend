@@ -18,7 +18,8 @@ class SearchOutingUseCase(
                     accountIdx = it.idx,
                     name = it.name,
                     studentNum = StudentNumberDto(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
-                    profileUrl = it.profileUrl
+                    profileUrl = it.profileUrl,
+                    createdTime = it.createdTime
                )
             }.toList()
     }
