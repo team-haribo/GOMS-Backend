@@ -2,7 +2,7 @@ package com.project.goms.domain.outing.entity
 
 import com.project.goms.domain.account.entity.Account
 import com.project.goms.global.entity.BaseIdxEntity
-import java.time.LocalDateTime
+import java.time.LocalTime
 import javax.persistence.*
 
 @Entity(name = "outing")
@@ -15,5 +15,5 @@ class Outing(
     val account: Account,
 
     @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6)")
-    val createdTime: LocalDateTime = LocalDateTime.now()
+    val createdTime: LocalTime = LocalTime.now()
 ): BaseIdxEntity(idx)

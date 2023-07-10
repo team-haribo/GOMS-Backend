@@ -5,6 +5,7 @@ import com.project.goms.domain.account.entity.StudentNum
 import com.project.goms.domain.account.usecase.dto.StudentNumberDto
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZonedDateTime
 import java.util.*
 import kotlin.reflect.KClass
@@ -39,6 +40,7 @@ object AnyValueObjectGenerator {
             String::class -> ""
             Date::class -> Date(0)
             LocalDateTime::class -> LocalDateTime.now()
+            LocalTime::class -> LocalTime.now()
             LocalDate::class -> LocalDate.now()
             ZonedDateTime::class -> ZonedDateTime.now()
             UUID::class -> UUID.randomUUID()
