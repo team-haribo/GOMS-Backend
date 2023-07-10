@@ -37,10 +37,15 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         every { jwtParser.parseRefreshToken(refreshToken) } returns parsedRefreshToken
         every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns refreshTokenEntity
         every { accountRepository.findByIdOrNull(refreshTokenEntity.accountIdx) } returns account
+        every { refreshTokenRepository.deleteById(refreshToken) } returns Unit
         every { jwtGenerator.generateToken(account.idx, account.authority) } returns tokenDto
 
         When("토큰 재발급을 요청하면") {
             val result = reissueTokenUseCase.execute(refreshToken)
+
+            Then("기존의 토큰이 삭제 되어야 한다.") {
+                verify(exactly = 1) {refreshTokenRepository.deleteById(refreshToken) }
+            }
 
             Then("토큰이 재발급 되어야 한다.") {
                 verify(exactly = 1) { jwtGenerator.generateToken(account.idx, account.authority) }
