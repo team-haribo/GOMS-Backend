@@ -3,11 +3,8 @@ package com.project.goms.domain.outing.presentation
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
-import com.project.goms.domain.outing.usecase.OutingUseCase
-import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
-import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
-import com.project.goms.domain.outing.usecase.SearchOutingUseCase
 import com.project.goms.domain.outing.presentation.data.response.SearchOutingResponse
+import com.project.goms.domain.outing.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,7 +17,8 @@ class OutingController(
     private val outingUseCase: OutingUseCase,
     private val queryOutingAccountUseCase: QueryOutingAccountUseCase,
     private val queryOutingCountUseCase: QueryOutingCountUseCase,
-    private val searchOutingUseCase: SearchOutingUseCase
+    private val searchOutingUseCase: SearchOutingUseCase,
+    private val validateOutingTimeUseCase: ValidateOutingTimeUseCase
 ) {
 
     @PostMapping("{outingUUID}")
@@ -44,6 +42,11 @@ class OutingController(
     fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
         searchOutingUseCase.execute(name)
             .let { outingConverter.toSearchOutingResponse(it) }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("validation")
+    fun validateOuting() : ResponseEntity<Boolean> =
+        validateOutingTimeUseCase.execute()
             .let { ResponseEntity.ok(it) }
 
 }
