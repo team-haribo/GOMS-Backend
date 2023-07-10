@@ -8,6 +8,7 @@ import com.project.goms.domain.outing.presentation.data.response.OutingAccountRe
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
 import org.springframework.stereotype.Component
+import java.time.format.DateTimeFormatter
 
 @Component
 class OutingConverterImpl: OutingConverter {
@@ -22,7 +23,7 @@ class OutingConverterImpl: OutingConverter {
                 name = it.name,
                 studentNum = StudentNumResponse(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
                 profileUrl = it.profileUrl,
-                createdTime = it.createdTime.hour.toString() + ":" + it.createdTime.minute
+                createdTime = it.createdTime.format(DateTimeFormatter.ofPattern("mm:ss"))
             )
         }
 
