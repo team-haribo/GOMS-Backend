@@ -3,7 +3,6 @@ package com.project.goms.domain.outing.presentation
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
-import com.project.goms.domain.outing.presentation.data.response.SearchOutingResponse
 import com.project.goms.domain.outing.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
