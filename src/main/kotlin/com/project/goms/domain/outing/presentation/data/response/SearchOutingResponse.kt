@@ -9,5 +9,5 @@ data class SearchOutingResponse(
     val name: String,
     val studentNum: StudentNumResponse,
     val profileUrl: String?,
-    val createdTime: LocalDateTime
+    val createdTime: String
 )
