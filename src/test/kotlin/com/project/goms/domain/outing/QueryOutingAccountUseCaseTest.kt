@@ -18,10 +18,11 @@ class QueryOutingAccountUseCaseTest: BehaviorSpec({
     val queryOutingAccountUseCase = QueryOutingAccountUseCase(outingRepository)
 
     Given("외출자가 생길때") {
-        val createdTime = LocalDateTime.now()
+        val localDateTimeNow = LocalDateTime.now()
+        val createdTime = localDateTimeNow.hour.toString() + ":" + localDateTimeNow.minute
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
-        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account, "createdTime" to createdTime)
+        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
         val outingAccountDto = AnyValueObjectGenerator.anyValueObject<OutingAccountDto>("accountIdx" to accountIdx, "createdTime" to createdTime)
 
         every { outingRepository.queryAllByOrderByCreatedTimeDesc() } returns listOf(outing)
