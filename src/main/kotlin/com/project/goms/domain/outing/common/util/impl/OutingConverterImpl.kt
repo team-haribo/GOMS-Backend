@@ -15,7 +15,7 @@ class OutingConverterImpl: OutingConverter {
     override fun toEntity(account: Account): Outing =
         Outing(idx = -1, account = account)
 
-    override fun toOutingAccountResponse(dto: List<OutingAccountDto>): List<OutingAccountResponse> =
+    override fun toResponse(dto: List<OutingAccountDto>): List<OutingAccountResponse> =
         dto.map {
             OutingAccountResponse(
                 accountIdx = it.accountIdx,
