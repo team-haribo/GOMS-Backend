@@ -23,7 +23,8 @@ class OutingConverterImpl: OutingConverter {
                 name = it.name,
                 studentNum = StudentNumResponse(it.studentNum.grade, it.studentNum.classNum, it.studentNum.number),
                 profileUrl = it.profileUrl,
-                createdTime = it.createdTime.format(DateTimeFormatter.ofPattern("mm:ss"))            )
+                createdTime = it.createdTime.hour.toString() + ":" + it.createdTime.minute
+            )
         }
 
     override fun toResponse(outingCount: Long): OutingCountResponse =
