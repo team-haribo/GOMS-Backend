@@ -7,7 +7,6 @@ import com.project.goms.domain.outing.usecase.OutingUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingAccountUseCase
 import com.project.goms.domain.outing.usecase.QueryOutingCountUseCase
 import com.project.goms.domain.outing.usecase.SearchOutingUseCase
-import com.project.goms.domain.outing.presentation.data.response.SearchOutingResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -41,9 +40,9 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("search")
-    fun searchOuting(@RequestParam name: String): ResponseEntity<List<SearchOutingResponse>> =
+    fun searchOuting(@RequestParam name: String): ResponseEntity<List<OutingAccountResponse>> =
         searchOutingUseCase.execute(name)
-            .let { outingConverter.toSearchOutingResponse(it) }
+            .let { outingConverter.toOutingAccountResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
