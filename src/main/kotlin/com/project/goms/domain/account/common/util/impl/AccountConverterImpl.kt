@@ -19,6 +19,7 @@ class AccountConverterImpl : AccountConverter {
                     it.studentNum.classNum,
                     it.studentNum.number
                 ),
+                authority = it.authority,
                 profileUrl = it.profileUrl,
                 lateCount = it.lateCount,
                 isOuting = it.isOuting,

@@ -27,6 +27,7 @@ class QueryAccountProfileUseCase(
                 classNum = account.studentNum.classNum,
                 number = account.studentNum.number
             ),
+            authority = account.authority,
             profileUrl = account.profileUrl,
             lateCount = lateCount,
             isOuting = outingRepository.existsByAccount(account),
