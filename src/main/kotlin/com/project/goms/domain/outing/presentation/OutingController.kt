@@ -2,13 +2,13 @@ package com.project.goms.domain.outing.presentation
 
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
-import com.project.goms.domain.outing.presentation.data.response.OutingAvailableResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import kotlin.collections.Map
 
 @RestController
 @RequestMapping("api/v1/outing")
@@ -45,9 +45,11 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("validation")
-    fun validateOuting(): ResponseEntity<OutingAvailableResponse> =
-        validateOutingTimeUseCase.execute()
-            .let { outingConverter.toResponse(it) }
-            .let { ResponseEntity.ok(it) }
+    fun validateOuting(): ResponseEntity<Map<String, Boolean>> {
+        val response = mutableMapOf<String, Boolean>()
+        return validateOutingTimeUseCase.execute()
+            .let { response["isOuting"] = it }
+            .let { ResponseEntity.ok(response) }
+    }
 
 }
