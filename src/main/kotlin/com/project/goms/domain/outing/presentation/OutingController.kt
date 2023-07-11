@@ -46,10 +46,9 @@ class OutingController(
 
     @GetMapping("validation")
     fun validateOuting(): ResponseEntity<Map<String, Boolean>> {
-        val response = mutableMapOf<String, Boolean>()
         return validateOutingTimeUseCase.execute()
-            .let { response["isOuting"] = it }
-            .let { ResponseEntity.ok(response) }
+            .let { mapOf("isOuting" to it) }
+            .let { ResponseEntity.ok(it) }
     }
 
 }
