@@ -31,7 +31,7 @@ class OutingConverterImpl: OutingConverter {
     override fun toResponse(outingCount: Long): OutingCountResponse =
         OutingCountResponse(outingCount = outingCount)
 
-    override fun toResponse(isOutingAvailable: Boolean): OutingAvailableResponse =
-        OutingAvailableResponse(isOutingAvailable)
+    override fun toResponse(isOuting: Boolean): OutingAvailableResponse =
+        OutingAvailableResponse(isOuting)
 
 }

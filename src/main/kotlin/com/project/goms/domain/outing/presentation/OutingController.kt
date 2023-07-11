@@ -2,6 +2,7 @@ package com.project.goms.domain.outing.presentation
 
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
+import com.project.goms.domain.outing.presentation.data.response.OutingAvailableResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.*
 import org.springframework.http.HttpStatus
@@ -44,8 +45,9 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("validation")
-    fun validateOuting(): ResponseEntity<Boolean> =
+    fun validateOuting(): ResponseEntity<OutingAvailableResponse> =
         validateOutingTimeUseCase.execute()
+            .let { outingConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
