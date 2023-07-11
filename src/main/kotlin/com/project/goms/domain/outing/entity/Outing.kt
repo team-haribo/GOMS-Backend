@@ -14,6 +14,6 @@ class Outing(
     @JoinColumn(name = "account_idx")
     val account: Account,
 
-    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6)")
+    @Column(nullable = false, updatable = false)
     val createdTime: LocalTime = LocalTime.now()
 ): BaseIdxEntity(idx)
