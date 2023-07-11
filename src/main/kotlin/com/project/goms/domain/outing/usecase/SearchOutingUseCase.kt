@@ -7,20 +7,41 @@ import com.project.goms.global.annotation.UseCaseWithReadOnlyTransaction
 
 @UseCaseWithReadOnlyTransaction
 class SearchOutingUseCase(
-    private val outingRepository: OutingRepository
+    private val outingRepository: OutingRepository,
 ) {
 
-    fun execute(name: String): List<OutingAccountDto> {
-         return outingRepository.queryByAccountNameContaining(name)
-             .map {
-                 OutingAccountDto(
+    fun execute(name: String?): List<OutingAccountDto> {
+        if (name == null) {
+            return outingRepository.findAll()
+                .map {
+                    OutingAccountDto(
+                        accountIdx = it.account.idx,
+                        name = it.account.name,
+                        studentNum = StudentNumberDto(
+                            it.account.studentNum.grade,
+                            it.account.studentNum.classNum,
+                            it.account.studentNum.number
+                        ),
+                        profileUrl = it.account.profileUrl,
+                        createdTime = it.createdTime
+                    )
+                }
+        }
+
+        return outingRepository.queryByAccountNameContaining(name)
+            .map {
+                OutingAccountDto(
                     accountIdx = it.account.idx,
                     name = it.account.name,
-                    studentNum = StudentNumberDto(it.account.studentNum.grade, it.account.studentNum.classNum, it.account.studentNum.number),
+                    studentNum = StudentNumberDto(
+                        it.account.studentNum.grade,
+                        it.account.studentNum.classNum,
+                        it.account.studentNum.number
+                    ),
                     profileUrl = it.account.profileUrl,
                     createdTime = it.createdTime
-               )
-            }.toList()
+                )
+            }
     }
 
 }
