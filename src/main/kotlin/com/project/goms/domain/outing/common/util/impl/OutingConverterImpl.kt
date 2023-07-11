@@ -5,7 +5,6 @@ import com.project.goms.domain.account.presentation.data.response.StudentNumResp
 import com.project.goms.domain.outing.common.util.OutingConverter
 import com.project.goms.domain.outing.entity.Outing
 import com.project.goms.domain.outing.presentation.data.response.OutingAccountResponse
-import com.project.goms.domain.outing.presentation.data.response.OutingAvailableResponse
 import com.project.goms.domain.outing.presentation.data.response.OutingCountResponse
 import com.project.goms.domain.outing.usecase.dto.OutingAccountDto
 import org.springframework.stereotype.Component
@@ -30,8 +29,5 @@ class OutingConverterImpl: OutingConverter {
 
     override fun toResponse(outingCount: Long): OutingCountResponse =
         OutingCountResponse(outingCount = outingCount)
-
-    override fun toResponse(isOuting: Boolean): OutingAvailableResponse =
-        OutingAvailableResponse(isOuting)
 
 }
