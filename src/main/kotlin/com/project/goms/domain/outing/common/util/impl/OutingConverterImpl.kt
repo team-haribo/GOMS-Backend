@@ -30,5 +30,4 @@ class OutingConverterImpl: OutingConverter {
     override fun toResponse(outingCount: Long): OutingCountResponse =
         OutingCountResponse(outingCount = outingCount)
 
-
 }
