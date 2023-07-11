@@ -47,8 +47,7 @@ class OutingController(
     @GetMapping("validation")
     fun validateOuting(): ResponseEntity<Map<String, Boolean>> {
         return validateOutingTimeUseCase.execute()
-            .let { mapOf("isOuting" to it) }
-            .let { ResponseEntity.ok(it) }
+            .let { ResponseEntity.ok(mapOf("isOuting" to it)) }
     }
 
 }
