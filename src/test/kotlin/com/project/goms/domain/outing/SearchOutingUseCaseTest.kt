@@ -15,21 +15,18 @@ import java.time.LocalTime
 import java.util.*
 
 class SearchOutingUseCaseTest: BehaviorSpec({
+
     val outingRepository = mockk<OutingRepository>()
     val searchOutingUseCase = SearchOutingUseCase(outingRepository)
-    Given("계정 이름을 입력했을때") {
+
+    Given("외출자 이름을 검색했을때") {
         val createdTime = LocalTime.now()
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val outingList = listOf(AnyValueObjectGenerator.anyValueObject<Outing>("account" to account, "createdTime" to createdTime))
         val name = ""
-        val outingAccountDto = OutingAccountDto(
-            accountIdx = accountIdx,
-            name = name,
-            studentNum = StudentNumberDto(0,0,0),
-            profileUrl = "",
-            createdTime = createdTime
-        )
+        val outingAccountDto = AnyValueObjectGenerator.anyValueObject<OutingAccountDto>("accountIdx" to accountIdx, "name" to name, "createdTime" to createdTime)
+
         every { outingRepository.findAll() } returns outingList
         every { outingRepository.queryByAccountNameContaining(name) } returns outingList
 
@@ -40,11 +37,13 @@ class SearchOutingUseCaseTest: BehaviorSpec({
                 result shouldBe listOf(outingAccountDto)
             }
         }
-        When("계정 요청을 하면") {
+
+        When("외출자 이름을 요청 하면") {
             val result = searchOutingUseCase.execute(name)
 
-            Then("result와 outingDto는 같아야 한다.")
-            result shouldBe listOf(outingAccountDto)
+            Then("result와 outingDto는 같아야 한다.") {
+                result shouldBe listOf(outingAccountDto)
+            }
         }
     }
 })
