@@ -5,7 +5,7 @@ import com.project.goms.domain.outing.entity.Outing
 import org.springframework.data.repository.CrudRepository
 import java.util.UUID
 
-interface OutingRepository: CrudRepository<Outing, UUID> {
+interface OutingRepository: CrudRepository<Outing, Long> {
 
     fun existsByAccount(account: Account): Boolean
     fun queryAllByOrderByCreatedTimeDesc(): List<Outing>
