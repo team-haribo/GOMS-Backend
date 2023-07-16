@@ -21,20 +21,18 @@ class DeleteOutingUseCaseTest : BehaviorSpec({
     val outingRepository = mockk<OutingRepository>()
     val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository)
 
-    Given("outingIdx가 주어졌을때") {
-        val outingIdx = UUID.randomUUID()
+    Given("accountIdx가 주어졌을때") {
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
-        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
 
-        every { accountRepository.findByIdOrNull(outingIdx) } returns account
+        every { accountRepository.findByIdOrNull(accountIdx) } returns account
         every { outingRepository.deleteByAccountIdx(accountIdx) } returns Unit
 
         When("외출자 리스트 삭제를 요청하면") {
-            deleteOutingUseCase.execute(outingIdx)
+            deleteOutingUseCase.execute(accountIdx)
 
             Then("외출자 리스트에서 삭제되야 한다.") {
-                verify(exactly = 1) { outingRepository.deleteByAccountIdx(outing.account.idx) }
+                verify(exactly = 1) { outingRepository.deleteByAccountIdx(accountIdx) }
             }
         }
 
