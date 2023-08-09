@@ -24,7 +24,7 @@ class SendDiscordUseCase(
 
         when (lateOneWeekAgoCount < 3) {
             true -> {
-                content = "@everyone \n"
+                content = "everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 금일 수요외출제를 통해 외출을 할 학생들은 반드시 저녁을 먹고 7시부터 자유롭게 외출 해주시고, \n"
                 content += "> **꼭 나가기 전 후로 GOMS 앱을 통해 QR을 찍어주세요!**\n"
@@ -33,7 +33,7 @@ class SendDiscordUseCase(
             }
 
             false -> {
-                content = "@everyone \n"
+                content = "everyone \n"
                 content += "\uD83D\uDCE2 오늘은 수요일 입니다. \uD83D\uDCE2 \n"
                 content += "> 저번주 외출제 지각생이 ${lateOneWeekAgoCount}명이여서 외출제는 진행하지 않습니다. \n"
                 content += "> 오늘 외출하다 걸릴시 무단 외출입니다. \n"
