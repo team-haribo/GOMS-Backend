@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 @Component
@@ -44,7 +45,7 @@ class JwtGenerator(
             .setSubject(accountIdx.toString())
             .claim(JwtProperties.TOKEN_TYPE, JwtProperties.REFRESH)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtExpTimeProperties.refreshExp * 1000))
+            .setExpiration(Date.from(LocalDateTime.now().plusMonths(1).atZone(ZoneId.systemDefault()).toInstant()))
             .compact()
 
         refreshTokenRepository.save(RefreshToken(refreshToken, accountIdx, jwtExpTimeProperties.refreshExp))
