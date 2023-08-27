@@ -13,6 +13,6 @@ data class RefreshToken(
 
     val accountIdx: UUID,
 
-    @TimeToLive(unit = TimeUnit.MILLISECONDS)
+    @TimeToLive(unit = TimeUnit.SECONDS)
     val expiredAt: Long
 )
