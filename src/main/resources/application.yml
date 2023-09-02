@@ -38,6 +38,5 @@ gauth:
 outing:
   expiredAt:  ${OUTING_EXP}
 
-discord:
-  webhookUrl: ${DISCORD_WEBHOOK_URL}
-
+fcm:
+  fileUrl: ${FCM_FILE_URL}
