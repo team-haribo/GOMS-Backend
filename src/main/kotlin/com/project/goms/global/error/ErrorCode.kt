@@ -24,6 +24,9 @@ enum class ErrorCode(
     // FEIGN
     FEIGN_BAD_REQUEST("FEIGN Bad Request", HttpStatus.BAD_REQUEST),
     FEIGN_FORBIDDEN("FEIGN Forbidden", HttpStatus.FORBIDDEN),
-    FEIGN_UNAUTHORIZED("FEIGN Unauthorized", HttpStatus.UNAUTHORIZED)
+    FEIGN_UNAUTHORIZED("FEIGN Unauthorized", HttpStatus.UNAUTHORIZED),
+
+    // NOTIFICATION
+    DEVICE_TOKEN_NOT_FOUND("device token이 존재하지 않은 사용자 입니다.", HttpStatus.NOT_FOUND)
 
 }
