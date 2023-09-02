@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("api/v2/notification")
+@RequestMapping("api/v1/notification")
 class NotificationController(
     private val setDeviceTokenUseCase: SetDeviceTokenUseCase,
     private val sendNotificationUseCase: SendNotificationUseCase
