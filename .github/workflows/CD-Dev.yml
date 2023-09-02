@@ -1,0 +1,84 @@
+name: CD to CloudType
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: jobgsm123/goms-v1
+          stage: main
+          yaml: |
+            name: goms-backend
+            app: java@11
+            options:
+              ports: 8080
+              env:
+                - name: DB_DRIVER
+                  value: org.mariadb.jdbc.Driver
+                - name: DB_URL
+                  value: ${{ secrets.DEV_DB_URL }}
+                - name: DB_USERNAME
+                  value: root
+                - name: DB_PASSWORD
+                  value: ${{ secrets.DEV_DB_PASSWORD }}
+                - name: REDIS_HOST
+                  value: ${{ secrets.DEV_REDIS_HOST }}
+                - name: REDIS_PORT
+                  value: ${{ secrets.DEV_REDIS_PORT }}
+                - name: DB_PLATFORM
+                  value: org.hibernate.dialect.MySQL8Dialect
+                - name: JPA_DDL_AUTO
+                  value: ${{ secrets.DEV_JPA_DDL_AUTO }}
+                - name: JWT_ACCESS_SECRET
+                  value: ${{ secrets.JWT_ACCESS_SECRET }}
+                - name: JWT_REFRESH_SECRET
+                  value: ${{ secrets.JWT_REFRESH_SECRET }}
+                - name: JWT_ACCESS_EXP
+                  value: ${{ secrets.JWT_ACCESS_EXP }}
+                - name: JWT_REFRESH_EXP
+                  value: ${{ secrets.JWT_REFRESH_EXP }}
+                - name: GAUTH_CLIENTID
+                  value: ${{ secrets.GAUTH_CLIENTID }}
+                - name: CLIENT_SECRET
+                  value: ${{ secrets.CLIENT_SECRET }}
+                - name: REDIRECT_URI
+                  value: ${{ secrets.REDIRECT_URI }}
+                - name: OUTING_EXP
+                  value: ${{ secrets.OUTING_EXP }}
+                - name: FCM_FILE_URL
+                  value: ${{ secrets.FCM_FILE_URL }}
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+
+      - name: GOMS Backend-V1 CD-Dev success Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ success() }}
+        with:
+          title: 🎉 GOMS V1 Develop Server CD success 🎉
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: 00FF00
+
+      - name: GOMS Backend-V1 CD-Dev failure Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          title: ❌ GOMS V1 Develop Server CD failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: FF0000
