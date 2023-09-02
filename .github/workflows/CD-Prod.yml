@@ -1,4 +1,4 @@
-name: CD
+name: CD To AWS-CodeDeploy
 
 on:
   push:
@@ -61,18 +61,18 @@ jobs:
           --s3-location bucket=goms-server-bucket,bundleType=zip,key=$GITHUB_SHA.zip \
           --region ap-northeast-2 \
 
-      - name: GOMS Backend CD success Discord Notification
+      - name: GOMS Backend-V1 CD-Prod success Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
         with:
-          title: 🎉 GOMS Server CD success 🎉
-          webhook: ${{ secrets.DISCORD_WEBHOOK_CI_BOT }}
+          title: 🎉 GOMS V1 Product Server CD success 🎉
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: 00FF00
 
-      - name: GOMS Backend CD failure Discord Notification
+      - name: GOMS Backend-V1 CD-Prod failure Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
         with:
-          title: ❌ GOMS Server CD failed ❌
-          webhook: ${{ secrets.DISCORD_WEBHOOK_CI_BOT }}
+          title: ❌ GOMS V1 Product Server CD failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: FF0000
