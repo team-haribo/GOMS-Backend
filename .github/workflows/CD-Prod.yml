@@ -23,7 +23,7 @@ jobs:
           project: teamgoms0516/goms-backend-v1
           stage: main
           yaml: >
-            name: goms-backend
+            name: goms_backend
             app: java@11
             options:
               ports: 8080
