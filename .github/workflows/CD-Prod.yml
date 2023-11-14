@@ -1,22 +1,20 @@
-name: Deploy to cloudtype
+name: CD-prod
 on:
   push:
-    branches: [ "main" ]
-
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Connect deploy key
         uses: cloudtype-github-actions/connect@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           ghtoken: ${{ secrets.GHP_TOKEN }}
-
-      - name: deploy
+      - name: Deploy
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
@@ -24,12 +22,14 @@ jobs:
           stage: main
           yaml: >
             name: goms-backend
+
             app: java@11
+
             options:
               ports: 8080
               env:
                 - name: CLIENT_SECRET
-                  value: ${{ secrets.CLIENT_SECRET }}
+                  value: ${{ secrets.CLOUDTYPE_TOKEN }}
                 - name: DB_URL
                   value: ${{ secrets.DB_URL }}
                 - name: DB_DRIVER
@@ -43,7 +43,7 @@ jobs:
                 - name: GAUTH_CLIENTID
                   value: ${{ secrets.GAUTH_CLIENTID }}
                 - name: JPA_DDL_AUTO
-                  value: ${{ secrets.DEV_JPA_DDL_AUTO }}
+                  value: ${{ secrets.JPA_DDL_AUTO }}
                 - name: JWT_ACCESS_EXP
                   value: ${{ secrets.JWT_ACCESS_EXP }}
                 - name: JWT_ACCESS_SECRET
@@ -67,18 +67,18 @@ jobs:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
 
-      - name: GOMS Backend-V1 CD-Prod success Discord Notification
+      - name: GOMS Backend V1 CD-prod success Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
         with:
-          title: 🎉 GOMS V1 Product Server CD success 🎉
+          title: 🎉 GOMS V1 Product Server CD-prod success 🎉
           webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: 00FF00
 
-      - name: GOMS Backend-V1 CD-Prod failure Discord Notification
+      - name: GOMS Backend V1 CD-prod failure Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
         with:
-          title: ❌ GOMS V1 Product Server CD failed ❌
+          title: ❌ GOMS V1 Product Server CD-prod failed ❌
           webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: FF0000
