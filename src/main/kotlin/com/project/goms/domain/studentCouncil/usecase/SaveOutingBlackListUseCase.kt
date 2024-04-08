@@ -5,10 +5,13 @@ import com.project.goms.domain.account.entity.repository.AccountRepository
 import com.project.goms.domain.outing.entity.OutingBlackList
 import com.project.goms.domain.outing.entity.repository.OutingBlackListRepository
 import com.project.goms.global.annotation.UseCaseWithTransaction
+import org.springframework.data.redis.core.RedisKeyValueAdapter
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.data.repository.findByIdOrNull
 import java.util.UUID
 
 @UseCaseWithTransaction
+@EnableRedisRepositories(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 class SaveOutingBlackListUseCase(
     private val accountRepository: AccountRepository,
     private val outingBlackListRepository: OutingBlackListRepository
