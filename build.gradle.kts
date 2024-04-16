@@ -74,7 +74,7 @@ dependencies {
 
 	/* security */
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0")
+	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v3.0.0")
 	testImplementation("org.springframework.security:spring-security-test")
 
 	/* jwt */
